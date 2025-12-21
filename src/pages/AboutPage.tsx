@@ -1,4 +1,5 @@
 import { About } from '@/components/About'
+import { Testimonials } from '@/components/Testimonials'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 
@@ -8,6 +9,7 @@ export default function AboutPage() {
       <Navbar />
       <main className="relative pt-20" role="main">
         <About />
+        <Testimonials />
       </main>
       <Footer />
     </div>
