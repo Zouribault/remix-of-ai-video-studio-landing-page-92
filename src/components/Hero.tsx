@@ -33,7 +33,7 @@ export function Hero() {
           <img 
             src={heroImages[currentSlide]} 
             alt="Björn Nolting Klinik" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           />
         </motion.div>
       </AnimatePresence>
