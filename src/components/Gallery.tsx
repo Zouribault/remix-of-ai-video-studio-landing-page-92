@@ -2,14 +2,14 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { X } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
-import equineSurgery from '@/assets/equine-surgery-room.jpg'
-import regenerativeTreatment from '@/assets/regenerative-treatment.jpg'
-import equineDiagnostics from '@/assets/equine-diagnostics.jpg'
-import legExamination from '@/assets/leg-examination.jpg'
-import horsePortrait from '@/assets/horse-portrait.jpg'
-import horseRecovery from '@/assets/horse-recovery.jpg'
-import expertiseXray from '@/assets/expertise-xray.jpg'
-import heroEquineClinic from '@/assets/hero-equine-clinic.jpg'
+import clinicSolarium from '@/assets/clinic-solarium.jpg'
+import clinicSurgery from '@/assets/clinic-surgery.jpg'
+import clinicXray from '@/assets/clinic-xray.jpg'
+import clinicCtScanner from '@/assets/clinic-ct-scanner.jpg'
+import clinicExamination from '@/assets/clinic-examination.jpg'
+import clinicMetavital from '@/assets/clinic-metavital.jpg'
+import clinicInjection from '@/assets/clinic-injection.jpg'
+import clinicMedicalEquipment from '@/assets/clinic-medical-equipment.jpg'
 
 export function Gallery() {
   const { t } = useLanguage()
@@ -28,14 +28,14 @@ export function Gallery() {
   ]
 
   const galleryImages = [
-    { src: equineSurgery, alt: t('galleryImage1'), category: 'surgery' },
-    { src: regenerativeTreatment, alt: t('galleryImage2'), category: 'treatments' },
-    { src: equineDiagnostics, alt: t('galleryImage3'), category: 'diagnostics' },
-    { src: legExamination, alt: t('galleryImage4'), category: 'exams' },
-    { src: horsePortrait, alt: t('galleryImage5'), category: 'patients' },
-    { src: horseRecovery, alt: t('galleryImage6'), category: 'recovery' },
-    { src: expertiseXray, alt: t('galleryImage7'), category: 'diagnostics' },
-    { src: heroEquineClinic, alt: t('galleryImage8'), category: 'clinic' },
+    { src: clinicSolarium, alt: t('galleryImage1'), category: 'treatments' },
+    { src: clinicSurgery, alt: t('galleryImage2'), category: 'surgery' },
+    { src: clinicXray, alt: t('galleryImage3'), category: 'diagnostics' },
+    { src: clinicCtScanner, alt: t('galleryImage4'), category: 'diagnostics' },
+    { src: clinicExamination, alt: t('galleryImage5'), category: 'exams' },
+    { src: clinicMetavital, alt: t('galleryImage6'), category: 'diagnostics' },
+    { src: clinicInjection, alt: t('galleryImage7'), category: 'treatments' },
+    { src: clinicMedicalEquipment, alt: t('galleryImage8'), category: 'treatments' },
   ]
   
   const filteredImages = filter === 'all' 
