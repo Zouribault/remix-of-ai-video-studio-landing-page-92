@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 import heroEquineClinic from '@/assets/hero-equine-clinic.jpg'
+import horsePortrait from '@/assets/horse-portrait.jpg'
+import legExamination from '@/assets/leg-examination.jpg'
 
 export function About() {
   const { t } = useLanguage()
@@ -29,20 +31,36 @@ export function About() {
           </p>
         </div>
 
-        {/* Featured Image */}
+        {/* Image Gallery */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }} 
-          whileInView={{ opacity: 1, scale: 1 }} 
+          initial={{ opacity: 0, y: 30 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
           viewport={{ once: true }}
-          className="mb-16 max-w-5xl mx-auto"
+          className="mb-16 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto"
         >
-          <div className="relative rounded-2xl overflow-hidden premium-shadow">
+          <div className="relative rounded-2xl overflow-hidden premium-shadow aspect-square">
             <img 
               src={heroEquineClinic} 
               alt="Equine orthopedic examination at the clinic"
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+          </div>
+          <div className="relative rounded-2xl overflow-hidden premium-shadow aspect-square md:row-span-1">
+            <img 
+              src={horsePortrait} 
+              alt="Beautiful sport horse portrait"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+          </div>
+          <div className="relative rounded-2xl overflow-hidden premium-shadow aspect-square">
+            <img 
+              src={legExamination} 
+              alt="Veterinarian examining horse leg"
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
           </div>
         </motion.div>
 

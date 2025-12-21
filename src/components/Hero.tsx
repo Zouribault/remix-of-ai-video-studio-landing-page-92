@@ -2,39 +2,9 @@
 
 import { motion } from 'framer-motion'
 import { Menu, X, ChevronDown, Globe } from 'lucide-react'
-import { useState, useEffect, Suspense } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Sphere, MeshDistortMaterial } from '@react-three/drei'
+import { useState, useEffect } from 'react'
 import { useLanguage, languages } from '@/contexts/LanguageContext'
-
-function AnimatedSphere() {
-  return (
-    <Sphere args={[1, 100, 200]} scale={2.5}>
-      <MeshDistortMaterial
-        color="#2d5a47"
-        attach="material"
-        distort={0.3}
-        speed={1.5}
-        roughness={0.4}
-        metalness={0.8}
-      />
-    </Sphere>
-  )
-}
-
-function Scene3D() {
-  return (
-    <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <pointLight position={[-10, -10, -5]} intensity={0.5} color="#c8a03c" />
-      <Suspense fallback={null}>
-        <AnimatedSphere />
-      </Suspense>
-      <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
-    </Canvas>
-  )
-}
+import horseRecovery from '@/assets/horse-recovery.jpg'
 
 export function Hero() {
   const { t, language, setLanguage } = useLanguage()
@@ -51,14 +21,17 @@ export function Hero() {
   const currentLang = languages.find(l => l.code === language)
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(150, 35%, 15%) 0%, hsl(150, 40%, 8%) 100%)' }}>
-      {/* 3D Background */}
-      <div className="absolute inset-0 opacity-60">
-        <Scene3D />
+    <div className="relative min-h-screen w-full overflow-hidden">
+      {/* Hero Background Image */}
+      <div className="absolute inset-0">
+        <img 
+          src={horseRecovery} 
+          alt="Beautiful sport horse in recovery" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
       </div>
-
-      {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
 
       {/* Navbar */}
       <motion.nav
