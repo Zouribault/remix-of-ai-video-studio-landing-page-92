@@ -1,46 +1,49 @@
 import { motion } from 'framer-motion'
 import { Star, Quote } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 import testimonial1 from '@/assets/testimonial-1.jpg'
 import testimonial2 from '@/assets/testimonial-2.jpg'
 import testimonial3 from '@/assets/testimonial-3.jpg'
 
-const testimonials = [
-  {
-    name: 'Maria Schneider',
-    role: 'Propriétaire de chevaux de dressage',
-    image: testimonial1,
-    quote: "Le Dr. Nolting a sauvé la carrière de mon cheval. Après une blessure grave au tendon, je pensais que tout était fini. Grâce à son expertise en médecine régénérative, mon cheval concourt à nouveau au plus haut niveau.",
-    rating: 5,
-  },
-  {
-    name: 'Hans Weber',
-    role: 'Cavalier professionnel de saut',
-    image: testimonial2,
-    quote: "En 15 ans de compétition internationale, je n'ai jamais rencontré un vétérinaire aussi compétent et dévoué. Sa connaissance approfondie de l'orthopédie équine est inégalée.",
-    rating: 5,
-  },
-  {
-    name: 'Sophie Laurent',
-    role: 'Entraîneur équestre',
-    image: testimonial3,
-    quote: "Nous confions tous nos chevaux de compétition au Dr. Nolting. Son approche préventive et ses diagnostics précis nous ont permis d'éviter de nombreuses blessures graves.",
-    rating: 5,
-  },
-]
-
 export function Testimonials() {
+  const { t } = useLanguage()
+
+  const testimonials = [
+    {
+      name: t('testimonial1Name'),
+      role: t('testimonial1Role'),
+      image: testimonial1,
+      quote: t('testimonial1Quote'),
+      rating: 5,
+    },
+    {
+      name: t('testimonial2Name'),
+      role: t('testimonial2Role'),
+      image: testimonial2,
+      quote: t('testimonial2Quote'),
+      rating: 5,
+    },
+    {
+      name: t('testimonial3Name'),
+      role: t('testimonial3Role'),
+      image: testimonial3,
+      quote: t('testimonial3Quote'),
+      rating: 5,
+    },
+  ]
+
   return (
     <section className="py-24 bg-card">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">
-            Témoignages
+            {t('testimonialsTag')}
           </span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-            Ce que disent nos clients
+            {t('testimonialsTitle')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Des propriétaires de chevaux et des cavaliers professionnels partagent leur expérience
+            {t('testimonialsSubtitle')}
           </p>
         </div>
 

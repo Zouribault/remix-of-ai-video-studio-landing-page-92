@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { X } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 import equineSurgery from '@/assets/equine-surgery-room.jpg'
 import regenerativeTreatment from '@/assets/regenerative-treatment.jpg'
 import equineDiagnostics from '@/assets/equine-diagnostics.jpg'
@@ -10,24 +11,34 @@ import horseRecovery from '@/assets/horse-recovery.jpg'
 import expertiseXray from '@/assets/expertise-xray.jpg'
 import heroEquineClinic from '@/assets/hero-equine-clinic.jpg'
 
-const galleryImages = [
-  { src: equineSurgery, alt: 'Salle de chirurgie équine moderne', category: 'Chirurgie' },
-  { src: regenerativeTreatment, alt: 'Traitement régénératif PRP', category: 'Traitements' },
-  { src: equineDiagnostics, alt: 'Diagnostic par échographie', category: 'Diagnostics' },
-  { src: legExamination, alt: 'Examen orthopédique', category: 'Examens' },
-  { src: horsePortrait, alt: 'Portrait de cheval de sport', category: 'Patients' },
-  { src: horseRecovery, alt: 'Cheval en récupération', category: 'Récupération' },
-  { src: expertiseXray, alt: 'Analyse de radiographies', category: 'Diagnostics' },
-  { src: heroEquineClinic, alt: 'Clinique équine', category: 'Clinique' },
-]
-
 export function Gallery() {
+  const { t } = useLanguage()
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [filter, setFilter] = useState<string>('Tous')
+  const [filter, setFilter] = useState<string>('all')
+
+  const categories = [
+    { key: 'all', label: t('galleryAll') },
+    { key: 'surgery', label: t('gallerySurgery') },
+    { key: 'treatments', label: t('galleryTreatments') },
+    { key: 'diagnostics', label: t('galleryDiagnostics') },
+    { key: 'exams', label: t('galleryExams') },
+    { key: 'patients', label: t('galleryPatients') },
+    { key: 'recovery', label: t('galleryRecovery') },
+    { key: 'clinic', label: t('galleryClinic') },
+  ]
+
+  const galleryImages = [
+    { src: equineSurgery, alt: t('galleryImage1'), category: 'surgery' },
+    { src: regenerativeTreatment, alt: t('galleryImage2'), category: 'treatments' },
+    { src: equineDiagnostics, alt: t('galleryImage3'), category: 'diagnostics' },
+    { src: legExamination, alt: t('galleryImage4'), category: 'exams' },
+    { src: horsePortrait, alt: t('galleryImage5'), category: 'patients' },
+    { src: horseRecovery, alt: t('galleryImage6'), category: 'recovery' },
+    { src: expertiseXray, alt: t('galleryImage7'), category: 'diagnostics' },
+    { src: heroEquineClinic, alt: t('galleryImage8'), category: 'clinic' },
+  ]
   
-  const categories = ['Tous', ...new Set(galleryImages.map(img => img.category))]
-  
-  const filteredImages = filter === 'Tous' 
+  const filteredImages = filter === 'all' 
     ? galleryImages 
     : galleryImages.filter(img => img.category === filter)
 
@@ -36,28 +47,28 @@ export function Gallery() {
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="text-center mb-12">
           <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">
-            Galerie
+            {t('galleryTag')}
           </span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-            Notre Clinique en Images
+            {t('galleryTitle')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Découvrez nos installations et notre travail au quotidien
+            {t('gallerySubtitle')}
           </p>
           
           {/* Filter Buttons */}
           <div className="flex flex-wrap justify-center gap-3">
             {categories.map((category) => (
               <button
-                key={category}
-                onClick={() => setFilter(category)}
+                key={category.key}
+                onClick={() => setFilter(category.key)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  filter === category
+                  filter === category.key
                     ? 'bg-accent text-primary-foreground'
                     : 'bg-background border border-border text-muted-foreground hover:border-accent/50'
                 }`}
               >
-                {category}
+                {category.label}
               </button>
             ))}
           </div>

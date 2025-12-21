@@ -1,49 +1,51 @@
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
-
-const faqItems = [
-  {
-    question: "Quels types de blessures traitez-vous le plus fréquemment ?",
-    answer: "Nous traitons principalement les blessures orthopédiques : tendinites, lésions articulaires, fractures, problèmes de dos et de locomotion. Notre expertise couvre l'ensemble du système musculo-squelettique équin, des sabots jusqu'à la colonne vertébrale."
-  },
-  {
-    question: "Comment se déroule une première consultation ?",
-    answer: "La première consultation comprend un examen clinique complet, une analyse de la démarche, et si nécessaire, des examens d'imagerie (radiographie, échographie, IRM). Nous prenons le temps de comprendre l'historique complet de votre cheval et vos objectifs."
-  },
-  {
-    question: "Proposez-vous des consultations à domicile ou en déplacement ?",
-    answer: "Oui, nous nous déplaçons dans toute l'Europe pour des consultations, des urgences et le suivi de chevaux de compétition. Nous intervenons également lors de grands événements équestres internationaux."
-  },
-  {
-    question: "Quels sont les délais de récupération typiques après une chirurgie ?",
-    answer: "Les délais varient selon le type d'intervention. Une arthroscopie simple peut permettre une reprise du travail en 4-6 semaines, tandis qu'une reconstruction tendineuse peut nécessiter 6-12 mois. Chaque protocole est personnalisé selon le patient."
-  },
-  {
-    question: "Utilisez-vous des traitements de médecine régénérative ?",
-    answer: "Absolument. Nous sommes pionniers dans l'utilisation de la thérapie par cellules souches, du PRP (plasma riche en plaquettes), et de l'IRAP. Ces traitements biologiques accélèrent la guérison et améliorent la qualité des tissus réparés."
-  },
-  {
-    question: "Comment prendre rendez-vous ?",
-    answer: "Vous pouvez nous contacter par téléphone, email ou via le formulaire de contact sur ce site. Pour les urgences, un numéro dédié est disponible 24h/24. Nous vous répondons généralement sous 24 heures."
-  },
-]
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export function FAQ() {
+  const { t } = useLanguage()
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+
+  const faqItems = [
+    {
+      question: t('faq1Question'),
+      answer: t('faq1Answer'),
+    },
+    {
+      question: t('faq2Question'),
+      answer: t('faq2Answer'),
+    },
+    {
+      question: t('faq3Question'),
+      answer: t('faq3Answer'),
+    },
+    {
+      question: t('faq4Question'),
+      answer: t('faq4Answer'),
+    },
+    {
+      question: t('faq5Question'),
+      answer: t('faq5Answer'),
+    },
+    {
+      question: t('faq6Question'),
+      answer: t('faq6Answer'),
+    },
+  ]
 
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">
-            FAQ
+            {t('faqTag')}
           </span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-            Questions Fréquentes
+            {t('faqTitle')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Trouvez les réponses aux questions les plus courantes
+            {t('faqSubtitle')}
           </p>
         </div>
 
