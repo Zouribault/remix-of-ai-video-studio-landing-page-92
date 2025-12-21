@@ -81,6 +81,58 @@ export interface TranslationKeys {
   footerRights: string
   footerPrivacy: string
   footerTerms: string
+  
+  // Testimonials
+  testimonialsTag: string
+  testimonialsTitle: string
+  testimonialsSubtitle: string
+  testimonial1Name: string
+  testimonial1Role: string
+  testimonial1Quote: string
+  testimonial2Name: string
+  testimonial2Role: string
+  testimonial2Quote: string
+  testimonial3Name: string
+  testimonial3Role: string
+  testimonial3Quote: string
+  
+  // FAQ
+  faqTag: string
+  faqTitle: string
+  faqSubtitle: string
+  faq1Question: string
+  faq1Answer: string
+  faq2Question: string
+  faq2Answer: string
+  faq3Question: string
+  faq3Answer: string
+  faq4Question: string
+  faq4Answer: string
+  faq5Question: string
+  faq5Answer: string
+  faq6Question: string
+  faq6Answer: string
+  
+  // Gallery
+  galleryTag: string
+  galleryTitle: string
+  gallerySubtitle: string
+  galleryAll: string
+  gallerySurgery: string
+  galleryTreatments: string
+  galleryDiagnostics: string
+  galleryExams: string
+  galleryPatients: string
+  galleryRecovery: string
+  galleryClinic: string
+  galleryImage1: string
+  galleryImage2: string
+  galleryImage3: string
+  galleryImage4: string
+  galleryImage5: string
+  galleryImage6: string
+  galleryImage7: string
+  galleryImage8: string
 }
 
 export const translations: Record<Language, TranslationKeys> = {
@@ -157,6 +209,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Alle Rechte vorbehalten',
     footerPrivacy: 'Datenschutz',
     footerTerms: 'AGB',
+    
+    // Testimonials
+    testimonialsTag: 'Referenzen',
+    testimonialsTitle: 'Was unsere Kunden sagen',
+    testimonialsSubtitle: 'Pferdebesitzer und Profireiter teilen ihre Erfahrungen',
+    testimonial1Name: 'Maria Schneider',
+    testimonial1Role: 'Dressurpferdebesitzerin',
+    testimonial1Quote: 'Dr. Nolting hat die Karriere meines Pferdes gerettet. Nach einer schweren Sehnenverletzung dachte ich, alles sei vorbei. Dank seiner Expertise in regenerativer Medizin springt mein Pferd wieder auf höchstem Niveau.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Professioneller Springreiter',
+    testimonial2Quote: 'In 15 Jahren internationaler Wettkämpfe habe ich noch nie einen so kompetenten und engagierten Tierarzt getroffen. Sein tiefes Wissen über Pferdeorthopädie ist unübertroffen.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Pferdetrainerin',
+    testimonial3Quote: 'Wir vertrauen alle unsere Turnierpferde Dr. Nolting an. Sein präventiver Ansatz und seine präzisen Diagnosen haben uns geholfen, viele schwere Verletzungen zu vermeiden.',
+    
+    // FAQ
+    faqTag: 'FAQ',
+    faqTitle: 'Häufig gestellte Fragen',
+    faqSubtitle: 'Finden Sie Antworten auf die häufigsten Fragen',
+    faq1Question: 'Welche Arten von Verletzungen behandeln Sie am häufigsten?',
+    faq1Answer: 'Wir behandeln hauptsächlich orthopädische Verletzungen: Sehnenentzündungen, Gelenkerkrankungen, Frakturen, Rücken- und Bewegungsprobleme. Unsere Expertise umfasst das gesamte Muskel-Skelett-System des Pferdes, von den Hufen bis zur Wirbelsäule.',
+    faq2Question: 'Wie läuft eine Erstberatung ab?',
+    faq2Answer: 'Die Erstberatung umfasst eine vollständige klinische Untersuchung, eine Ganganalyse und bei Bedarf bildgebende Untersuchungen (Röntgen, Ultraschall, MRT). Wir nehmen uns Zeit, die vollständige Geschichte Ihres Pferdes und Ihre Ziele zu verstehen.',
+    faq3Question: 'Bieten Sie Hausbesuche oder Termine vor Ort an?',
+    faq3Answer: 'Ja, wir reisen europaweit für Beratungen, Notfälle und die Betreuung von Turnierpferden. Wir sind auch bei großen internationalen Pferdesportveranstaltungen vor Ort.',
+    faq4Question: 'Was sind typische Erholungszeiten nach einer Operation?',
+    faq4Answer: 'Die Zeiten variieren je nach Art des Eingriffs. Eine einfache Arthroskopie kann eine Rückkehr zur Arbeit in 4-6 Wochen ermöglichen, während eine Sehnenrekonstruktion 6-12 Monate dauern kann. Jedes Protokoll wird individuell auf den Patienten abgestimmt.',
+    faq5Question: 'Verwenden Sie regenerative Medizin-Behandlungen?',
+    faq5Answer: 'Absolut. Wir sind Pioniere bei der Verwendung von Stammzelltherapie, PRP (plättchenreiches Plasma) und IRAP. Diese biologischen Behandlungen beschleunigen die Heilung und verbessern die Qualität des reparierten Gewebes.',
+    faq6Question: 'Wie kann ich einen Termin vereinbaren?',
+    faq6Answer: 'Sie können uns telefonisch, per E-Mail oder über das Kontaktformular auf dieser Website erreichen. Für Notfälle steht eine 24/7-Hotline zur Verfügung. Wir antworten in der Regel innerhalb von 24 Stunden.',
+    
+    // Gallery
+    galleryTag: 'Galerie',
+    galleryTitle: 'Unsere Klinik in Bildern',
+    gallerySubtitle: 'Entdecken Sie unsere Einrichtungen und unsere tägliche Arbeit',
+    galleryAll: 'Alle',
+    gallerySurgery: 'Chirurgie',
+    galleryTreatments: 'Behandlungen',
+    galleryDiagnostics: 'Diagnostik',
+    galleryExams: 'Untersuchungen',
+    galleryPatients: 'Patienten',
+    galleryRecovery: 'Erholung',
+    galleryClinic: 'Klinik',
+    galleryImage1: 'Moderner Pferde-OP-Saal',
+    galleryImage2: 'PRP regenerative Behandlung',
+    galleryImage3: 'Ultraschalldiagnostik',
+    galleryImage4: 'Orthopädische Untersuchung',
+    galleryImage5: 'Sportpferde-Porträt',
+    galleryImage6: 'Pferd in Erholung',
+    galleryImage7: 'Röntgenanalyse',
+    galleryImage8: 'Pferdeklinik',
   },
   
   en: {
@@ -232,6 +336,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'All rights reserved',
     footerPrivacy: 'Privacy Policy',
     footerTerms: 'Terms of Service',
+    
+    // Testimonials
+    testimonialsTag: 'Testimonials',
+    testimonialsTitle: 'What Our Clients Say',
+    testimonialsSubtitle: 'Horse owners and professional riders share their experience',
+    testimonial1Name: 'Maria Schneider',
+    testimonial1Role: 'Dressage Horse Owner',
+    testimonial1Quote: 'Dr. Nolting saved my horse\'s career. After a severe tendon injury, I thought everything was over. Thanks to his expertise in regenerative medicine, my horse is competing at the highest level again.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Professional Show Jumper',
+    testimonial2Quote: 'In 15 years of international competition, I have never met a veterinarian as competent and dedicated. His deep knowledge of equine orthopedics is unmatched.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Equestrian Trainer',
+    testimonial3Quote: 'We entrust all our competition horses to Dr. Nolting. His preventive approach and precise diagnoses have helped us avoid many serious injuries.',
+    
+    // FAQ
+    faqTag: 'FAQ',
+    faqTitle: 'Frequently Asked Questions',
+    faqSubtitle: 'Find answers to the most common questions',
+    faq1Question: 'What types of injuries do you treat most frequently?',
+    faq1Answer: 'We primarily treat orthopedic injuries: tendinitis, joint lesions, fractures, back and locomotion problems. Our expertise covers the entire equine musculoskeletal system, from hooves to spine.',
+    faq2Question: 'How does an initial consultation work?',
+    faq2Answer: 'The initial consultation includes a complete clinical examination, gait analysis, and if necessary, imaging studies (X-ray, ultrasound, MRI). We take time to understand your horse\'s complete history and your goals.',
+    faq3Question: 'Do you offer home visits or on-site appointments?',
+    faq3Answer: 'Yes, we travel throughout Europe for consultations, emergencies, and competition horse care. We also attend major international equestrian events.',
+    faq4Question: 'What are typical recovery times after surgery?',
+    faq4Answer: 'Times vary depending on the type of procedure. A simple arthroscopy may allow return to work in 4-6 weeks, while tendon reconstruction may require 6-12 months. Each protocol is customized to the patient.',
+    faq5Question: 'Do you use regenerative medicine treatments?',
+    faq5Answer: 'Absolutely. We are pioneers in using stem cell therapy, PRP (platelet-rich plasma), and IRAP. These biological treatments accelerate healing and improve the quality of repaired tissue.',
+    faq6Question: 'How can I book an appointment?',
+    faq6Answer: 'You can contact us by phone, email, or via the contact form on this site. For emergencies, a dedicated 24/7 line is available. We typically respond within 24 hours.',
+    
+    // Gallery
+    galleryTag: 'Gallery',
+    galleryTitle: 'Our Clinic in Pictures',
+    gallerySubtitle: 'Discover our facilities and daily work',
+    galleryAll: 'All',
+    gallerySurgery: 'Surgery',
+    galleryTreatments: 'Treatments',
+    galleryDiagnostics: 'Diagnostics',
+    galleryExams: 'Exams',
+    galleryPatients: 'Patients',
+    galleryRecovery: 'Recovery',
+    galleryClinic: 'Clinic',
+    galleryImage1: 'Modern equine surgery room',
+    galleryImage2: 'PRP regenerative treatment',
+    galleryImage3: 'Ultrasound diagnostics',
+    galleryImage4: 'Orthopedic examination',
+    galleryImage5: 'Sport horse portrait',
+    galleryImage6: 'Horse in recovery',
+    galleryImage7: 'X-ray analysis',
+    galleryImage8: 'Equine clinic',
   },
   
   es: {
@@ -307,6 +463,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Todos los derechos reservados',
     footerPrivacy: 'Política de Privacidad',
     footerTerms: 'Términos de Servicio',
+    
+    // Testimonials
+    testimonialsTag: 'Testimonios',
+    testimonialsTitle: 'Lo que dicen nuestros clientes',
+    testimonialsSubtitle: 'Propietarios de caballos y jinetes profesionales comparten su experiencia',
+    testimonial1Name: 'María Schneider',
+    testimonial1Role: 'Propietaria de caballos de doma',
+    testimonial1Quote: 'El Dr. Nolting salvó la carrera de mi caballo. Después de una lesión grave en el tendón, pensé que todo había terminado. Gracias a su experiencia en medicina regenerativa, mi caballo compite de nuevo al más alto nivel.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Jinete profesional de salto',
+    testimonial2Quote: 'En 15 años de competición internacional, nunca he conocido a un veterinario tan competente y dedicado. Su profundo conocimiento de la ortopedia equina es inigualable.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Entrenadora ecuestre',
+    testimonial3Quote: 'Confiamos todos nuestros caballos de competición al Dr. Nolting. Su enfoque preventivo y sus diagnósticos precisos nos han ayudado a evitar muchas lesiones graves.',
+    
+    // FAQ
+    faqTag: 'Preguntas frecuentes',
+    faqTitle: 'Preguntas Frecuentes',
+    faqSubtitle: 'Encuentre respuestas a las preguntas más comunes',
+    faq1Question: '¿Qué tipos de lesiones trata con más frecuencia?',
+    faq1Answer: 'Tratamos principalmente lesiones ortopédicas: tendinitis, lesiones articulares, fracturas, problemas de espalda y locomoción. Nuestra experiencia abarca todo el sistema musculoesquelético equino, desde los cascos hasta la columna vertebral.',
+    faq2Question: '¿Cómo funciona una consulta inicial?',
+    faq2Answer: 'La consulta inicial incluye un examen clínico completo, análisis de la marcha y, si es necesario, estudios de imagen (rayos X, ecografía, resonancia magnética). Nos tomamos el tiempo para comprender el historial completo de su caballo y sus objetivos.',
+    faq3Question: '¿Ofrecen visitas a domicilio o citas en el lugar?',
+    faq3Answer: 'Sí, viajamos por toda Europa para consultas, emergencias y cuidado de caballos de competición. También asistimos a los principales eventos ecuestres internacionales.',
+    faq4Question: '¿Cuáles son los tiempos de recuperación típicos después de una cirugía?',
+    faq4Answer: 'Los tiempos varían según el tipo de procedimiento. Una artroscopia simple puede permitir el retorno al trabajo en 4-6 semanas, mientras que una reconstrucción de tendón puede requerir 6-12 meses. Cada protocolo se personaliza para el paciente.',
+    faq5Question: '¿Utilizan tratamientos de medicina regenerativa?',
+    faq5Answer: 'Absolutamente. Somos pioneros en el uso de terapia con células madre, PRP (plasma rico en plaquetas) e IRAP. Estos tratamientos biológicos aceleran la curación y mejoran la calidad del tejido reparado.',
+    faq6Question: '¿Cómo puedo reservar una cita?',
+    faq6Answer: 'Puede contactarnos por teléfono, correo electrónico o a través del formulario de contacto en este sitio. Para emergencias, hay una línea dedicada 24/7. Normalmente respondemos dentro de las 24 horas.',
+    
+    // Gallery
+    galleryTag: 'Galería',
+    galleryTitle: 'Nuestra Clínica en Imágenes',
+    gallerySubtitle: 'Descubra nuestras instalaciones y trabajo diario',
+    galleryAll: 'Todos',
+    gallerySurgery: 'Cirugía',
+    galleryTreatments: 'Tratamientos',
+    galleryDiagnostics: 'Diagnósticos',
+    galleryExams: 'Exámenes',
+    galleryPatients: 'Pacientes',
+    galleryRecovery: 'Recuperación',
+    galleryClinic: 'Clínica',
+    galleryImage1: 'Sala de cirugía equina moderna',
+    galleryImage2: 'Tratamiento regenerativo PRP',
+    galleryImage3: 'Diagnóstico por ultrasonido',
+    galleryImage4: 'Examen ortopédico',
+    galleryImage5: 'Retrato de caballo deportivo',
+    galleryImage6: 'Caballo en recuperación',
+    galleryImage7: 'Análisis de rayos X',
+    galleryImage8: 'Clínica equina',
   },
   
   pt: {
@@ -382,6 +590,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Todos os direitos reservados',
     footerPrivacy: 'Política de Privacidade',
     footerTerms: 'Termos de Serviço',
+    
+    // Testimonials
+    testimonialsTag: 'Depoimentos',
+    testimonialsTitle: 'O que nossos clientes dizem',
+    testimonialsSubtitle: 'Proprietários de cavalos e cavaleiros profissionais compartilham suas experiências',
+    testimonial1Name: 'Maria Schneider',
+    testimonial1Role: 'Proprietária de cavalos de adestramento',
+    testimonial1Quote: 'O Dr. Nolting salvou a carreira do meu cavalo. Após uma lesão grave no tendão, pensei que tudo estava acabado. Graças à sua expertise em medicina regenerativa, meu cavalo compete novamente no mais alto nível.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Cavaleiro profissional de salto',
+    testimonial2Quote: 'Em 15 anos de competição internacional, nunca conheci um veterinário tão competente e dedicado. Seu profundo conhecimento de ortopedia equina é incomparável.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Treinadora equestre',
+    testimonial3Quote: 'Confiamos todos os nossos cavalos de competição ao Dr. Nolting. Sua abordagem preventiva e diagnósticos precisos nos ajudaram a evitar muitas lesões graves.',
+    
+    // FAQ
+    faqTag: 'FAQ',
+    faqTitle: 'Perguntas Frequentes',
+    faqSubtitle: 'Encontre respostas para as perguntas mais comuns',
+    faq1Question: 'Quais tipos de lesões você trata com mais frequência?',
+    faq1Answer: 'Tratamos principalmente lesões ortopédicas: tendinite, lesões articulares, fraturas, problemas de coluna e locomoção. Nossa expertise abrange todo o sistema musculoesquelético equino, dos cascos à coluna vertebral.',
+    faq2Question: 'Como funciona uma consulta inicial?',
+    faq2Answer: 'A consulta inicial inclui um exame clínico completo, análise de marcha e, se necessário, exames de imagem (raio-X, ultrassom, ressonância magnética). Reservamos tempo para entender o histórico completo do seu cavalo e seus objetivos.',
+    faq3Question: 'Vocês oferecem visitas domiciliares ou consultas no local?',
+    faq3Answer: 'Sim, viajamos por toda a Europa para consultas, emergências e cuidados com cavalos de competição. Também participamos dos principais eventos equestres internacionais.',
+    faq4Question: 'Quais são os tempos de recuperação típicos após uma cirurgia?',
+    faq4Answer: 'Os tempos variam dependendo do tipo de procedimento. Uma artroscopia simples pode permitir retorno ao trabalho em 4-6 semanas, enquanto uma reconstrução de tendão pode exigir 6-12 meses. Cada protocolo é personalizado para o paciente.',
+    faq5Question: 'Vocês usam tratamentos de medicina regenerativa?',
+    faq5Answer: 'Absolutamente. Somos pioneiros no uso de terapia com células-tronco, PRP (plasma rico em plaquetas) e IRAP. Esses tratamentos biológicos aceleram a cicatrização e melhoram a qualidade do tecido reparado.',
+    faq6Question: 'Como posso agendar uma consulta?',
+    faq6Answer: 'Você pode nos contatar por telefone, e-mail ou através do formulário de contato neste site. Para emergências, uma linha dedicada 24/7 está disponível. Normalmente respondemos em 24 horas.',
+    
+    // Gallery
+    galleryTag: 'Galeria',
+    galleryTitle: 'Nossa Clínica em Imagens',
+    gallerySubtitle: 'Descubra nossas instalações e trabalho diário',
+    galleryAll: 'Todos',
+    gallerySurgery: 'Cirurgia',
+    galleryTreatments: 'Tratamentos',
+    galleryDiagnostics: 'Diagnósticos',
+    galleryExams: 'Exames',
+    galleryPatients: 'Pacientes',
+    galleryRecovery: 'Recuperação',
+    galleryClinic: 'Clínica',
+    galleryImage1: 'Sala de cirurgia equina moderna',
+    galleryImage2: 'Tratamento regenerativo PRP',
+    galleryImage3: 'Diagnóstico por ultrassom',
+    galleryImage4: 'Exame ortopédico',
+    galleryImage5: 'Retrato de cavalo esportivo',
+    galleryImage6: 'Cavalo em recuperação',
+    galleryImage7: 'Análise de raio-X',
+    galleryImage8: 'Clínica equina',
   },
   
   fr: {
@@ -457,6 +717,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Tous droits réservés',
     footerPrivacy: 'Politique de Confidentialité',
     footerTerms: 'Conditions d\'Utilisation',
+    
+    // Testimonials
+    testimonialsTag: 'Témoignages',
+    testimonialsTitle: 'Ce que disent nos clients',
+    testimonialsSubtitle: 'Des propriétaires de chevaux et des cavaliers professionnels partagent leur expérience',
+    testimonial1Name: 'Maria Schneider',
+    testimonial1Role: 'Propriétaire de chevaux de dressage',
+    testimonial1Quote: 'Le Dr. Nolting a sauvé la carrière de mon cheval. Après une blessure grave au tendon, je pensais que tout était fini. Grâce à son expertise en médecine régénérative, mon cheval concourt à nouveau au plus haut niveau.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Cavalier professionnel de saut',
+    testimonial2Quote: 'En 15 ans de compétition internationale, je n\'ai jamais rencontré un vétérinaire aussi compétent et dévoué. Sa connaissance approfondie de l\'orthopédie équine est inégalée.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Entraîneur équestre',
+    testimonial3Quote: 'Nous confions tous nos chevaux de compétition au Dr. Nolting. Son approche préventive et ses diagnostics précis nous ont permis d\'éviter de nombreuses blessures graves.',
+    
+    // FAQ
+    faqTag: 'FAQ',
+    faqTitle: 'Questions Fréquentes',
+    faqSubtitle: 'Trouvez les réponses aux questions les plus courantes',
+    faq1Question: 'Quels types de blessures traitez-vous le plus fréquemment ?',
+    faq1Answer: 'Nous traitons principalement les blessures orthopédiques : tendinites, lésions articulaires, fractures, problèmes de dos et de locomotion. Notre expertise couvre l\'ensemble du système musculo-squelettique équin, des sabots jusqu\'à la colonne vertébrale.',
+    faq2Question: 'Comment se déroule une première consultation ?',
+    faq2Answer: 'La première consultation comprend un examen clinique complet, une analyse de la démarche, et si nécessaire, des examens d\'imagerie (radiographie, échographie, IRM). Nous prenons le temps de comprendre l\'historique complet de votre cheval et vos objectifs.',
+    faq3Question: 'Proposez-vous des consultations à domicile ou en déplacement ?',
+    faq3Answer: 'Oui, nous nous déplaçons dans toute l\'Europe pour des consultations, des urgences et le suivi de chevaux de compétition. Nous intervenons également lors de grands événements équestres internationaux.',
+    faq4Question: 'Quels sont les délais de récupération typiques après une chirurgie ?',
+    faq4Answer: 'Les délais varient selon le type d\'intervention. Une arthroscopie simple peut permettre une reprise du travail en 4-6 semaines, tandis qu\'une reconstruction tendineuse peut nécessiter 6-12 mois. Chaque protocole est personnalisé selon le patient.',
+    faq5Question: 'Utilisez-vous des traitements de médecine régénérative ?',
+    faq5Answer: 'Absolument. Nous sommes pionniers dans l\'utilisation de la thérapie par cellules souches, du PRP (plasma riche en plaquettes), et de l\'IRAP. Ces traitements biologiques accélèrent la guérison et améliorent la qualité des tissus réparés.',
+    faq6Question: 'Comment prendre rendez-vous ?',
+    faq6Answer: 'Vous pouvez nous contacter par téléphone, email ou via le formulaire de contact sur ce site. Pour les urgences, un numéro dédié est disponible 24h/24. Nous vous répondons généralement sous 24 heures.',
+    
+    // Gallery
+    galleryTag: 'Galerie',
+    galleryTitle: 'Notre Clinique en Images',
+    gallerySubtitle: 'Découvrez nos installations et notre travail au quotidien',
+    galleryAll: 'Tous',
+    gallerySurgery: 'Chirurgie',
+    galleryTreatments: 'Traitements',
+    galleryDiagnostics: 'Diagnostics',
+    galleryExams: 'Examens',
+    galleryPatients: 'Patients',
+    galleryRecovery: 'Récupération',
+    galleryClinic: 'Clinique',
+    galleryImage1: 'Salle de chirurgie équine moderne',
+    galleryImage2: 'Traitement régénératif PRP',
+    galleryImage3: 'Diagnostic par échographie',
+    galleryImage4: 'Examen orthopédique',
+    galleryImage5: 'Portrait de cheval de sport',
+    galleryImage6: 'Cheval en récupération',
+    galleryImage7: 'Analyse de radiographies',
+    galleryImage8: 'Clinique équine',
   },
   
   it: {
@@ -532,6 +844,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Tutti i diritti riservati',
     footerPrivacy: 'Privacy Policy',
     footerTerms: 'Termini di Servizio',
+    
+    // Testimonials
+    testimonialsTag: 'Testimonianze',
+    testimonialsTitle: 'Cosa dicono i nostri clienti',
+    testimonialsSubtitle: 'Proprietari di cavalli e cavalieri professionisti condividono la loro esperienza',
+    testimonial1Name: 'Maria Schneider',
+    testimonial1Role: 'Proprietaria di cavalli da dressage',
+    testimonial1Quote: 'Il Dr. Nolting ha salvato la carriera del mio cavallo. Dopo un grave infortunio al tendine, pensavo che fosse tutto finito. Grazie alla sua esperienza in medicina rigenerativa, il mio cavallo compete di nuovo ai massimi livelli.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Cavaliere professionista di salto ostacoli',
+    testimonial2Quote: 'In 15 anni di competizioni internazionali, non ho mai incontrato un veterinario così competente e dedicato. La sua profonda conoscenza dell\'ortopedia equina è impareggiabile.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Istruttrice equestre',
+    testimonial3Quote: 'Affidiamo tutti i nostri cavalli da competizione al Dr. Nolting. Il suo approccio preventivo e le diagnosi precise ci hanno aiutato a evitare molti infortuni gravi.',
+    
+    // FAQ
+    faqTag: 'FAQ',
+    faqTitle: 'Domande Frequenti',
+    faqSubtitle: 'Trova le risposte alle domande più comuni',
+    faq1Question: 'Quali tipi di infortuni trattate più frequentemente?',
+    faq1Answer: 'Trattiamo principalmente infortuni ortopedici: tendiniti, lesioni articolari, fratture, problemi alla schiena e di locomozione. La nostra competenza copre l\'intero sistema muscolo-scheletrico equino, dagli zoccoli alla colonna vertebrale.',
+    faq2Question: 'Come funziona una prima consultazione?',
+    faq2Answer: 'La prima consultazione include un esame clinico completo, analisi dell\'andatura e, se necessario, studi di imaging (raggi X, ecografia, risonanza magnetica). Ci prendiamo il tempo per capire la storia completa del tuo cavallo e i tuoi obiettivi.',
+    faq3Question: 'Offrite visite a domicilio o appuntamenti sul posto?',
+    faq3Answer: 'Sì, viaggiamo in tutta Europa per consultazioni, emergenze e cura dei cavalli da competizione. Partecipiamo anche ai principali eventi equestri internazionali.',
+    faq4Question: 'Quali sono i tempi di recupero tipici dopo un intervento?',
+    faq4Answer: 'I tempi variano a seconda del tipo di procedura. Un\'artroscopia semplice può permettere il ritorno al lavoro in 4-6 settimane, mentre una ricostruzione del tendine può richiedere 6-12 mesi. Ogni protocollo è personalizzato per il paziente.',
+    faq5Question: 'Utilizzate trattamenti di medicina rigenerativa?',
+    faq5Answer: 'Assolutamente. Siamo pionieri nell\'uso della terapia con cellule staminali, PRP (plasma ricco di piastrine) e IRAP. Questi trattamenti biologici accelerano la guarigione e migliorano la qualità del tessuto riparato.',
+    faq6Question: 'Come posso prenotare un appuntamento?',
+    faq6Answer: 'Puoi contattarci per telefono, email o tramite il modulo di contatto su questo sito. Per le emergenze, è disponibile una linea dedicata 24/7. Di solito rispondiamo entro 24 ore.',
+    
+    // Gallery
+    galleryTag: 'Galleria',
+    galleryTitle: 'La Nostra Clinica in Immagini',
+    gallerySubtitle: 'Scopri le nostre strutture e il lavoro quotidiano',
+    galleryAll: 'Tutti',
+    gallerySurgery: 'Chirurgia',
+    galleryTreatments: 'Trattamenti',
+    galleryDiagnostics: 'Diagnostica',
+    galleryExams: 'Esami',
+    galleryPatients: 'Pazienti',
+    galleryRecovery: 'Recupero',
+    galleryClinic: 'Clinica',
+    galleryImage1: 'Sala operatoria equina moderna',
+    galleryImage2: 'Trattamento rigenerativo PRP',
+    galleryImage3: 'Diagnostica ecografica',
+    galleryImage4: 'Esame ortopedico',
+    galleryImage5: 'Ritratto di cavallo sportivo',
+    galleryImage6: 'Cavallo in recupero',
+    galleryImage7: 'Analisi radiografica',
+    galleryImage8: 'Clinica equina',
   },
   
   no: {
@@ -607,6 +971,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Alle rettigheter forbeholdt',
     footerPrivacy: 'Personvern',
     footerTerms: 'Vilkår for Bruk',
+    
+    // Testimonials
+    testimonialsTag: 'Anbefalinger',
+    testimonialsTitle: 'Hva våre kunder sier',
+    testimonialsSubtitle: 'Hesteeiere og profesjonelle ryttere deler sin erfaring',
+    testimonial1Name: 'Maria Schneider',
+    testimonial1Role: 'Dressurhesteier',
+    testimonial1Quote: 'Dr. Nolting reddet hestens karriere. Etter en alvorlig seneskade trodde jeg alt var over. Takket være hans ekspertise innen regenerativ medisin konkurrerer hesten min igjen på høyeste nivå.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Profesjonell sprangytter',
+    testimonial2Quote: 'I 15 år med internasjonale konkurranser har jeg aldri møtt en så kompetent og dedikert veterinær. Hans dype kunnskap om hesteortopedi er uovertruffen.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Hestetrener',
+    testimonial3Quote: 'Vi overlater alle våre konkurransehester til Dr. Nolting. Hans forebyggende tilnærming og presise diagnoser har hjulpet oss å unngå mange alvorlige skader.',
+    
+    // FAQ
+    faqTag: 'FAQ',
+    faqTitle: 'Ofte Stilte Spørsmål',
+    faqSubtitle: 'Finn svar på de vanligste spørsmålene',
+    faq1Question: 'Hvilke typer skader behandler dere oftest?',
+    faq1Answer: 'Vi behandler hovedsakelig ortopediske skader: senebetennelser, leddskader, brudd, rygg- og bevegelighetsproblemer. Vår ekspertise dekker hele hestens muskel-skjelettsystem, fra hover til ryggrad.',
+    faq2Question: 'Hvordan fungerer en førstekonsultasjon?',
+    faq2Answer: 'Førstekonsultasjonen inkluderer en fullstendig klinisk undersøkelse, ganganalyse og om nødvendig, bildeundersøkelser (røntgen, ultralyd, MR). Vi tar oss tid til å forstå hestens komplette historie og dine mål.',
+    faq3Question: 'Tilbyr dere hjemmebesøk eller konsultasjoner på stedet?',
+    faq3Answer: 'Ja, vi reiser over hele Europa for konsultasjoner, nødstilfeller og oppfølging av konkurransehester. Vi deltar også på store internasjonale hesteevents.',
+    faq4Question: 'Hva er typiske restitusjonstider etter operasjon?',
+    faq4Answer: 'Tidene varierer avhengig av type inngrep. En enkel artroskopi kan tillate retur til arbeid på 4-6 uker, mens en senerekonstruksjon kan kreve 6-12 måneder. Hver protokoll tilpasses pasienten.',
+    faq5Question: 'Bruker dere regenerativ medisin-behandlinger?',
+    faq5Answer: 'Absolutt. Vi er pionerer i bruk av stamcelleterapi, PRP (platerikt plasma) og IRAP. Disse biologiske behandlingene fremskynder helbredelse og forbedrer kvaliteten på reparert vev.',
+    faq6Question: 'Hvordan kan jeg bestille time?',
+    faq6Answer: 'Du kan kontakte oss per telefon, e-post eller via kontaktskjemaet på denne siden. For nødstilfeller er en dedikert 24/7-linje tilgjengelig. Vi svarer vanligvis innen 24 timer.',
+    
+    // Gallery
+    galleryTag: 'Galleri',
+    galleryTitle: 'Vår Klinikk i Bilder',
+    gallerySubtitle: 'Oppdag våre fasiliteter og daglige arbeid',
+    galleryAll: 'Alle',
+    gallerySurgery: 'Kirurgi',
+    galleryTreatments: 'Behandlinger',
+    galleryDiagnostics: 'Diagnostikk',
+    galleryExams: 'Undersøkelser',
+    galleryPatients: 'Pasienter',
+    galleryRecovery: 'Restitusjon',
+    galleryClinic: 'Klinikk',
+    galleryImage1: 'Moderne hestekirurgisal',
+    galleryImage2: 'PRP regenerativ behandling',
+    galleryImage3: 'Ultralyddiagnostikk',
+    galleryImage4: 'Ortopedisk undersøkelse',
+    galleryImage5: 'Sportshestportrett',
+    galleryImage6: 'Hest i restitusjon',
+    galleryImage7: 'Røntgenanalyse',
+    galleryImage8: 'Hesteklinikk',
   },
   
   fi: {
@@ -682,6 +1098,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Kaikki oikeudet pidätetään',
     footerPrivacy: 'Tietosuojakäytäntö',
     footerTerms: 'Käyttöehdot',
+    
+    // Testimonials
+    testimonialsTag: 'Suositukset',
+    testimonialsTitle: 'Mitä asiakkaamme sanovat',
+    testimonialsSubtitle: 'Hevosenomistajat ja ammattiratsastajat jakavat kokemuksensa',
+    testimonial1Name: 'Maria Schneider',
+    testimonial1Role: 'Kouluratsuhevosen omistaja',
+    testimonial1Quote: 'Dr. Nolting pelasti hevoseni uran. Vakavan jännevamman jälkeen luulin, että kaikki oli ohi. Hänen regeneratiivisen lääketieteen asiantuntemuksensa ansiosta hevoseni kilpailee jälleen huipputasolla.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Ammattilaisestehyppääjä',
+    testimonial2Quote: '15 vuoden kansainvälisen kilpailukokemuksen aikana en ole koskaan tavannut yhtä pätevää ja omistautunutta eläinlääkäriä. Hänen syvällinen tietämyksensä hevosortopediasta on vertaansa vailla.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Hevosvalmentaja',
+    testimonial3Quote: 'Uskomme kaikki kilpahevosemme Dr. Noltingille. Hänen ennaltaehkäisevä lähestymistapansa ja tarkat diagnoosit ovat auttaneet meitä välttämään monia vakavia vammoja.',
+    
+    // FAQ
+    faqTag: 'UKK',
+    faqTitle: 'Usein Kysytyt Kysymykset',
+    faqSubtitle: 'Löydä vastaukset yleisimpiin kysymyksiin',
+    faq1Question: 'Millaisia vammoja hoidatte useimmin?',
+    faq1Answer: 'Hoidamme pääasiassa ortopedisia vammoja: jännetulehduksia, nivelvammoja, murtumia, selkä- ja liikkumisongelmia. Asiantuntemuksemme kattaa koko hevosen tuki- ja liikuntaelimistön, kavioista selkärankaan.',
+    faq2Question: 'Miten ensimmäinen konsultaatio toimii?',
+    faq2Answer: 'Ensimmäinen konsultaatio sisältää täydellisen kliinisen tutkimuksen, kävelyanalyysin ja tarvittaessa kuvantamistutkimukset (röntgen, ultraääni, MRI). Otamme aikaa ymmärtääksemme hevosesi täydellisen historian ja tavoitteesi.',
+    faq3Question: 'Tarjoatteko kotikäyntejä tai paikan päällä tapaamisia?',
+    faq3Answer: 'Kyllä, matkustamme ympäri Eurooppaa konsultaatioihin, hätätapauksiin ja kilpahevosten hoitoon. Osallistumme myös suuriin kansainvälisiin ratsastustapahtumiin.',
+    faq4Question: 'Mitkä ovat tyypilliset toipumisajat leikkauksen jälkeen?',
+    faq4Answer: 'Ajat vaihtelevat toimenpiteen tyypin mukaan. Yksinkertainen tähystys voi sallia paluun työhön 4-6 viikossa, kun taas jänteen rekonstruktio voi vaatia 6-12 kuukautta. Jokainen protokolla räätälöidään potilaan mukaan.',
+    faq5Question: 'Käytättekö regeneratiivisen lääketieteen hoitoja?',
+    faq5Answer: 'Ehdottomasti. Olemme edelläkävijöitä kantasoluterapian, PRP:n (verihiutalerikasplasma) ja IRAP:n käytössä. Nämä biologiset hoidot nopeuttavat paranemista ja parantavat korjatun kudoksen laatua.',
+    faq6Question: 'Miten voin varata ajan?',
+    faq6Answer: 'Voit ottaa meihin yhteyttä puhelimitse, sähköpostitse tai tämän sivuston yhteydenottolomakkeella. Hätätapauksissa on käytettävissä oma 24/7-linja. Vastaamme yleensä 24 tunnin kuluessa.',
+    
+    // Gallery
+    galleryTag: 'Galleria',
+    galleryTitle: 'Klinikkamme Kuvina',
+    gallerySubtitle: 'Tutustu tiloihimme ja päivittäiseen työhömme',
+    galleryAll: 'Kaikki',
+    gallerySurgery: 'Kirurgia',
+    galleryTreatments: 'Hoidot',
+    galleryDiagnostics: 'Diagnostiikka',
+    galleryExams: 'Tutkimukset',
+    galleryPatients: 'Potilaat',
+    galleryRecovery: 'Toipuminen',
+    galleryClinic: 'Klinikka',
+    galleryImage1: 'Moderni hevoskirurgiahuone',
+    galleryImage2: 'PRP regeneratiivinen hoito',
+    galleryImage3: 'Ultraäänidiagnostiikka',
+    galleryImage4: 'Ortopedinen tutkimus',
+    galleryImage5: 'Urheiluhevosen muotokuva',
+    galleryImage6: 'Hevonen toipumassa',
+    galleryImage7: 'Röntgenanalyysi',
+    galleryImage8: 'Hevosklinikka',
   },
   
   sv: {
@@ -757,6 +1225,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Alla rättigheter förbehållna',
     footerPrivacy: 'Integritetspolicy',
     footerTerms: 'Användarvillkor',
+    
+    // Testimonials
+    testimonialsTag: 'Omdömen',
+    testimonialsTitle: 'Vad våra kunder säger',
+    testimonialsSubtitle: 'Hästägare och professionella ryttare delar sina erfarenheter',
+    testimonial1Name: 'Maria Schneider',
+    testimonial1Role: 'Dressyrhästägare',
+    testimonial1Quote: 'Dr. Nolting räddade min hästs karriär. Efter en allvarlig senskada trodde jag att allt var över. Tack vare hans expertis inom regenerativ medicin tävlar min häst igen på högsta nivå.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Professionell hoppryttare',
+    testimonial2Quote: 'Under 15 års internationell tävling har jag aldrig mött en så kompetent och hängiven veterinär. Hans djupa kunskap om hästortopedi är oöverträffad.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Hästtränare',
+    testimonial3Quote: 'Vi anförtror alla våra tävlingshästar till Dr. Nolting. Hans förebyggande tillvägagångssätt och precisa diagnoser har hjälpt oss undvika många allvarliga skador.',
+    
+    // FAQ
+    faqTag: 'FAQ',
+    faqTitle: 'Vanliga Frågor',
+    faqSubtitle: 'Hitta svar på de vanligaste frågorna',
+    faq1Question: 'Vilka typer av skador behandlar ni oftast?',
+    faq1Answer: 'Vi behandlar främst ortopediska skador: seninflammationer, ledskador, frakturer, rygg- och rörelseproblem. Vår expertis täcker hela hästens muskuloskeletala system, från hovar till ryggrad.',
+    faq2Question: 'Hur fungerar en första konsultation?',
+    faq2Answer: 'Den första konsultationen inkluderar en fullständig klinisk undersökning, gånganalys och vid behov bildundersökningar (röntgen, ultraljud, MRI). Vi tar oss tid att förstå din hästs kompletta historia och dina mål.',
+    faq3Question: 'Erbjuder ni hembesök eller konsultationer på plats?',
+    faq3Answer: 'Ja, vi reser över hela Europa för konsultationer, nödsituationer och vård av tävlingshästar. Vi deltar också på stora internationella hästsportevenemang.',
+    faq4Question: 'Vilka är typiska återhämtningstider efter operation?',
+    faq4Answer: 'Tiderna varierar beroende på typ av ingrepp. En enkel artroskopi kan tillåta återgång till arbete på 4-6 veckor, medan en senrekonstruktion kan kräva 6-12 månader. Varje protokoll anpassas efter patienten.',
+    faq5Question: 'Använder ni regenerativ medicin-behandlingar?',
+    faq5Answer: 'Absolut. Vi är pionjärer inom användning av stamcellsterapi, PRP (trombocytrik plasma) och IRAP. Dessa biologiska behandlingar påskyndar läkning och förbättrar kvaliteten på reparerad vävnad.',
+    faq6Question: 'Hur kan jag boka en tid?',
+    faq6Answer: 'Du kan kontakta oss per telefon, e-post eller via kontaktformuläret på denna sida. För nödsituationer finns en dedikerad 24/7-linje. Vi svarar vanligtvis inom 24 timmar.',
+    
+    // Gallery
+    galleryTag: 'Galleri',
+    galleryTitle: 'Vår Klinik i Bilder',
+    gallerySubtitle: 'Upptäck våra faciliteter och dagliga arbete',
+    galleryAll: 'Alla',
+    gallerySurgery: 'Kirurgi',
+    galleryTreatments: 'Behandlingar',
+    galleryDiagnostics: 'Diagnostik',
+    galleryExams: 'Undersökningar',
+    galleryPatients: 'Patienter',
+    galleryRecovery: 'Återhämtning',
+    galleryClinic: 'Klinik',
+    galleryImage1: 'Modern hästkirurgisal',
+    galleryImage2: 'PRP regenerativ behandling',
+    galleryImage3: 'Ultraljudsdiagnostik',
+    galleryImage4: 'Ortopedisk undersökning',
+    galleryImage5: 'Sporthästporträtt',
+    galleryImage6: 'Häst under återhämtning',
+    galleryImage7: 'Röntgenanalys',
+    galleryImage8: 'Hästklinik',
   },
   
   nl: {
@@ -832,6 +1352,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Alle rechten voorbehouden',
     footerPrivacy: 'Privacybeleid',
     footerTerms: 'Gebruiksvoorwaarden',
+    
+    // Testimonials
+    testimonialsTag: 'Getuigenissen',
+    testimonialsTitle: 'Wat onze klanten zeggen',
+    testimonialsSubtitle: 'Paardeneigenaren en professionele ruiters delen hun ervaring',
+    testimonial1Name: 'Maria Schneider',
+    testimonial1Role: 'Dressuurpaardeneigenaar',
+    testimonial1Quote: 'Dr. Nolting heeft de carrière van mijn paard gered. Na een ernstige peesblessure dacht ik dat alles voorbij was. Dankzij zijn expertise in regeneratieve geneeskunde concurreert mijn paard weer op het hoogste niveau.',
+    testimonial2Name: 'Hans Weber',
+    testimonial2Role: 'Professionele springruiter',
+    testimonial2Quote: 'In 15 jaar internationale competitie heb ik nooit zo\'n competente en toegewijde dierenarts ontmoet. Zijn diepgaande kennis van paardenorthopedie is ongeëvenaard.',
+    testimonial3Name: 'Sophie Laurent',
+    testimonial3Role: 'Paardentrainer',
+    testimonial3Quote: 'We vertrouwen al onze wedstrijdpaarden toe aan Dr. Nolting. Zijn preventieve aanpak en nauwkeurige diagnoses hebben ons geholpen veel ernstige blessures te voorkomen.',
+    
+    // FAQ
+    faqTag: 'FAQ',
+    faqTitle: 'Veelgestelde Vragen',
+    faqSubtitle: 'Vind antwoorden op de meest voorkomende vragen',
+    faq1Question: 'Welke soorten blessures behandelt u het vaakst?',
+    faq1Answer: 'We behandelen voornamelijk orthopedische blessures: peesontsteking, gewrichtsletsel, fracturen, rug- en bewegingsproblemen. Onze expertise omvat het hele bewegingsapparaat van het paard, van hoeven tot wervelkolom.',
+    faq2Question: 'Hoe verloopt een eerste consultatie?',
+    faq2Answer: 'De eerste consultatie omvat een volledig klinisch onderzoek, ganganalyse en indien nodig beeldvormend onderzoek (röntgen, echografie, MRI). We nemen de tijd om de volledige geschiedenis van uw paard en uw doelen te begrijpen.',
+    faq3Question: 'Biedt u huisbezoeken of consulten op locatie aan?',
+    faq3Answer: 'Ja, we reizen door heel Europa voor consulten, noodgevallen en verzorging van wedstrijdpaarden. We zijn ook aanwezig bij grote internationale paardensportevenementen.',
+    faq4Question: 'Wat zijn typische hersteltijden na een operatie?',
+    faq4Answer: 'De tijden variëren afhankelijk van het type ingreep. Een eenvoudige artroscopie kan terugkeer naar werk in 4-6 weken toestaan, terwijl een peesreconstructie 6-12 maanden kan vereisen. Elk protocol wordt aangepast aan de patiënt.',
+    faq5Question: 'Gebruikt u regeneratieve geneeskundebehandelingen?',
+    faq5Answer: 'Absoluut. We zijn pioniers in het gebruik van stamceltherapie, PRP (bloedplaatjesrijk plasma) en IRAP. Deze biologische behandelingen versnellen genezing en verbeteren de kwaliteit van gerepareerd weefsel.',
+    faq6Question: 'Hoe kan ik een afspraak maken?',
+    faq6Answer: 'U kunt contact met ons opnemen per telefoon, e-mail of via het contactformulier op deze site. Voor noodgevallen is een speciale 24/7-lijn beschikbaar. We reageren meestal binnen 24 uur.',
+    
+    // Gallery
+    galleryTag: 'Galerij',
+    galleryTitle: 'Onze Kliniek in Beeld',
+    gallerySubtitle: 'Ontdek onze faciliteiten en dagelijks werk',
+    galleryAll: 'Alle',
+    gallerySurgery: 'Chirurgie',
+    galleryTreatments: 'Behandelingen',
+    galleryDiagnostics: 'Diagnostiek',
+    galleryExams: 'Onderzoeken',
+    galleryPatients: 'Patiënten',
+    galleryRecovery: 'Herstel',
+    galleryClinic: 'Kliniek',
+    galleryImage1: 'Moderne paardenoperatiekamer',
+    galleryImage2: 'PRP regeneratieve behandeling',
+    galleryImage3: 'Echografie diagnostiek',
+    galleryImage4: 'Orthopedisch onderzoek',
+    galleryImage5: 'Sportpaard portret',
+    galleryImage6: 'Paard in herstel',
+    galleryImage7: 'Röntgenanalyse',
+    galleryImage8: 'Paardenkliniek',
   },
   
   ru: {
@@ -907,6 +1479,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'Все права защищены',
     footerPrivacy: 'Политика Конфиденциальности',
     footerTerms: 'Условия Использования',
+    
+    // Testimonials
+    testimonialsTag: 'Отзывы',
+    testimonialsTitle: 'Что говорят наши клиенты',
+    testimonialsSubtitle: 'Владельцы лошадей и профессиональные наездники делятся своим опытом',
+    testimonial1Name: 'Мария Шнайдер',
+    testimonial1Role: 'Владелица выездковых лошадей',
+    testimonial1Quote: 'Доктор Нольтинг спас карьеру моей лошади. После серьёзной травмы сухожилия я думала, что всё кончено. Благодаря его опыту в регенеративной медицине моя лошадь снова выступает на высшем уровне.',
+    testimonial2Name: 'Ханс Вебер',
+    testimonial2Role: 'Профессиональный конкурист',
+    testimonial2Quote: 'За 15 лет международных соревнований я никогда не встречал такого компетентного и преданного ветеринара. Его глубокие знания в ортопедии лошадей непревзойдённы.',
+    testimonial3Name: 'Софи Лоран',
+    testimonial3Role: 'Тренер по конному спорту',
+    testimonial3Quote: 'Мы доверяем всех наших соревновательных лошадей доктору Нольтингу. Его профилактический подход и точные диагнозы помогли нам избежать многих серьёзных травм.',
+    
+    // FAQ
+    faqTag: 'ЧЗВ',
+    faqTitle: 'Часто Задаваемые Вопросы',
+    faqSubtitle: 'Найдите ответы на самые распространённые вопросы',
+    faq1Question: 'Какие типы травм вы лечите чаще всего?',
+    faq1Answer: 'Мы в основном лечим ортопедические травмы: тендинит, повреждения суставов, переломы, проблемы со спиной и передвижением. Наш опыт охватывает всю костно-мышечную систему лошади, от копыт до позвоночника.',
+    faq2Question: 'Как проходит первичная консультация?',
+    faq2Answer: 'Первичная консультация включает полный клинический осмотр, анализ походки и при необходимости визуализирующие исследования (рентген, УЗИ, МРТ). Мы уделяем время, чтобы понять полную историю вашей лошади и ваши цели.',
+    faq3Question: 'Вы предлагаете выезды на дом или консультации на месте?',
+    faq3Answer: 'Да, мы путешествуем по всей Европе для консультаций, экстренных случаев и ухода за соревновательными лошадьми. Мы также присутствуем на крупных международных конных мероприятиях.',
+    faq4Question: 'Каковы типичные сроки восстановления после операции?',
+    faq4Answer: 'Сроки варьируются в зависимости от типа процедуры. Простая артроскопия может позволить вернуться к работе через 4-6 недель, тогда как реконструкция сухожилия может потребовать 6-12 месяцев. Каждый протокол адаптируется под пациента.',
+    faq5Question: 'Вы используете методы регенеративной медицины?',
+    faq5Answer: 'Безусловно. Мы являемся пионерами в использовании терапии стволовыми клетками, PRP (богатая тромбоцитами плазма) и IRAP. Эти биологические методы лечения ускоряют заживление и улучшают качество восстановленных тканей.',
+    faq6Question: 'Как я могу записаться на приём?',
+    faq6Answer: 'Вы можете связаться с нами по телефону, электронной почте или через контактную форму на этом сайте. Для экстренных случаев доступна специальная линия 24/7. Обычно мы отвечаем в течение 24 часов.',
+    
+    // Gallery
+    galleryTag: 'Галерея',
+    galleryTitle: 'Наша Клиника в Фотографиях',
+    gallerySubtitle: 'Познакомьтесь с нашими объектами и повседневной работой',
+    galleryAll: 'Все',
+    gallerySurgery: 'Хирургия',
+    galleryTreatments: 'Лечение',
+    galleryDiagnostics: 'Диагностика',
+    galleryExams: 'Обследования',
+    galleryPatients: 'Пациенты',
+    galleryRecovery: 'Восстановление',
+    galleryClinic: 'Клиника',
+    galleryImage1: 'Современная операционная для лошадей',
+    galleryImage2: 'PRP регенеративное лечение',
+    galleryImage3: 'Ультразвуковая диагностика',
+    galleryImage4: 'Ортопедический осмотр',
+    galleryImage5: 'Портрет спортивной лошади',
+    galleryImage6: 'Лошадь на восстановлении',
+    galleryImage7: 'Рентгенологический анализ',
+    galleryImage8: 'Конная клиника',
   },
   
   zh: {
@@ -982,6 +1606,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: '版权所有',
     footerPrivacy: '隐私政策',
     footerTerms: '服务条款',
+    
+    // Testimonials
+    testimonialsTag: '客户评价',
+    testimonialsTitle: '客户评价',
+    testimonialsSubtitle: '马主和专业骑手分享他们的经验',
+    testimonial1Name: '玛丽亚·施奈德',
+    testimonial1Role: '盛装舞步马主',
+    testimonial1Quote: 'Nolting博士挽救了我马匹的职业生涯。在严重的肌腱损伤后，我以为一切都结束了。多亏了他在再生医学方面的专业知识，我的马再次在最高水平上比赛。',
+    testimonial2Name: '汉斯·韦伯',
+    testimonial2Role: '专业障碍赛骑手',
+    testimonial2Quote: '在15年的国际比赛中，我从未遇到过如此能干和敬业的兽医。他对马匹骨科的深入了解是无与伦比的。',
+    testimonial3Name: '索菲·洛朗',
+    testimonial3Role: '马术教练',
+    testimonial3Quote: '我们将所有比赛马匹都交给Nolting博士照顾。他的预防性方法和精确诊断帮助我们避免了许多严重的伤害。',
+    
+    // FAQ
+    faqTag: '常见问题',
+    faqTitle: '常见问题',
+    faqSubtitle: '查找最常见问题的答案',
+    faq1Question: '您最常治疗哪些类型的伤害？',
+    faq1Answer: '我们主要治疗骨科损伤：肌腱炎、关节损伤、骨折、背部和运动问题。我们的专业知识涵盖整个马匹肌肉骨骼系统，从蹄到脊柱。',
+    faq2Question: '首次咨询是如何进行的？',
+    faq2Answer: '首次咨询包括完整的临床检查、步态分析，以及必要时的影像学检查（X光、超声波、MRI）。我们会花时间了解您马匹的完整病史和您的目标。',
+    faq3Question: '您提供上门服务或现场咨询吗？',
+    faq3Answer: '是的，我们在整个欧洲提供咨询、紧急情况处理和比赛马匹护理服务。我们还参加主要的国际马术赛事。',
+    faq4Question: '手术后典型的恢复时间是多久？',
+    faq4Answer: '时间因手术类型而异。简单的关节镜手术可能在4-6周内恢复工作，而肌腱重建可能需要6-12个月。每个方案都根据患者情况定制。',
+    faq5Question: '您使用再生医学治疗吗？',
+    faq5Answer: '当然。我们是干细胞疗法、PRP（富血小板血浆）和IRAP使用的先驱。这些生物治疗可加速愈合并提高修复组织的质量。',
+    faq6Question: '我如何预约？',
+    faq6Answer: '您可以通过电话、电子邮件或本网站的联系表格与我们联系。紧急情况可拨打24/7专线。我们通常在24小时内回复。',
+    
+    // Gallery
+    galleryTag: '图库',
+    galleryTitle: '诊所图片展示',
+    gallerySubtitle: '了解我们的设施和日常工作',
+    galleryAll: '全部',
+    gallerySurgery: '手术',
+    galleryTreatments: '治疗',
+    galleryDiagnostics: '诊断',
+    galleryExams: '检查',
+    galleryPatients: '患者',
+    galleryRecovery: '恢复',
+    galleryClinic: '诊所',
+    galleryImage1: '现代马匹手术室',
+    galleryImage2: 'PRP再生治疗',
+    galleryImage3: '超声波诊断',
+    galleryImage4: '骨科检查',
+    galleryImage5: '运动马肖像',
+    galleryImage6: '恢复中的马匹',
+    galleryImage7: 'X光分析',
+    galleryImage8: '马匹诊所',
   },
   
   ja: {
@@ -1057,6 +1733,58 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: '全著作権所有',
     footerPrivacy: 'プライバシーポリシー',
     footerTerms: '利用規約',
+    
+    // Testimonials
+    testimonialsTag: 'お客様の声',
+    testimonialsTitle: 'お客様の声',
+    testimonialsSubtitle: '馬のオーナーとプロの騎手が経験を共有',
+    testimonial1Name: 'マリア・シュナイダー',
+    testimonial1Role: '馬場馬術馬オーナー',
+    testimonial1Quote: 'ノルティング博士は私の馬のキャリアを救ってくれました。重度の腱損傷の後、すべて終わりだと思いました。彼の再生医療の専門知識のおかげで、私の馬は再び最高レベルで競技しています。',
+    testimonial2Name: 'ハンス・ウェーバー',
+    testimonial2Role: 'プロ障害馬術選手',
+    testimonial2Quote: '15年間の国際競技で、これほど有能で献身的な獣医師に出会ったことはありません。馬整形外科に関する彼の深い知識は比類がありません。',
+    testimonial3Name: 'ソフィー・ローラン',
+    testimonial3Role: '馬術トレーナー',
+    testimonial3Quote: '私たちは競技馬すべてをノルティング博士に任せています。彼の予防的アプローチと正確な診断により、多くの深刻な怪我を避けることができました。',
+    
+    // FAQ
+    faqTag: 'よくある質問',
+    faqTitle: 'よくある質問',
+    faqSubtitle: '最も一般的な質問への回答を見つける',
+    faq1Question: '最も頻繁に治療する怪我の種類は何ですか？',
+    faq1Answer: '主に整形外科的損傷を治療します：腱炎、関節損傷、骨折、背中と運動の問題。私たちの専門知識は、蹄から脊椎まで馬の筋骨格系全体をカバーしています。',
+    faq2Question: '初回相談はどのように行われますか？',
+    faq2Answer: '初回相談には、完全な臨床検査、歩様分析、必要に応じて画像検査（X線、超音波、MRI）が含まれます。お馬の完全な履歴とあなたの目標を理解するために時間をかけます。',
+    faq3Question: '訪問診療や現地での相談は行っていますか？',
+    faq3Answer: 'はい、ヨーロッパ全土で相談、緊急事態、競技馬のケアのために出張しています。また、主要な国際馬術イベントにも参加しています。',
+    faq4Question: '手術後の典型的な回復期間はどのくらいですか？',
+    faq4Answer: '期間は手術の種類によって異なります。単純な関節鏡検査では4-6週間で仕事に復帰できる場合がありますが、腱の再建には6-12ヶ月かかることがあります。各プロトコルは患者に合わせてカスタマイズされます。',
+    faq5Question: '再生医療治療を使用していますか？',
+    faq5Answer: 'もちろんです。私たちは幹細胞療法、PRP（多血小板血漿）、IRAPの使用のパイオニアです。これらの生物学的治療は治癒を促進し、修復された組織の品質を向上させます。',
+    faq6Question: '予約はどのようにすればよいですか？',
+    faq6Answer: '電話、メール、またはこのサイトのお問い合わせフォームからご連絡いただけます。緊急の場合は24時間対応の専用ラインをご利用いただけます。通常24時間以内に返信いたします。',
+    
+    // Gallery
+    galleryTag: 'ギャラリー',
+    galleryTitle: 'クリニックの写真',
+    gallerySubtitle: '施設と日常業務をご覧ください',
+    galleryAll: 'すべて',
+    gallerySurgery: '手術',
+    galleryTreatments: '治療',
+    galleryDiagnostics: '診断',
+    galleryExams: '検査',
+    galleryPatients: '患者',
+    galleryRecovery: '回復',
+    galleryClinic: 'クリニック',
+    galleryImage1: '最新の馬手術室',
+    galleryImage2: 'PRP再生治療',
+    galleryImage3: '超音波診断',
+    galleryImage4: '整形外科検査',
+    galleryImage5: 'スポーツホースのポートレート',
+    galleryImage6: '回復中の馬',
+    galleryImage7: 'X線分析',
+    galleryImage8: '馬クリニック',
   },
   
   ar: {
@@ -1132,5 +1860,57 @@ export const translations: Record<Language, TranslationKeys> = {
     footerRights: 'جميع الحقوق محفوظة',
     footerPrivacy: 'سياسة الخصوصية',
     footerTerms: 'شروط الخدمة',
+    
+    // Testimonials
+    testimonialsTag: 'آراء العملاء',
+    testimonialsTitle: 'ماذا يقول عملاؤنا',
+    testimonialsSubtitle: 'أصحاب الخيول والفرسان المحترفون يشاركون تجاربهم',
+    testimonial1Name: 'ماريا شنايدر',
+    testimonial1Role: 'مالكة خيول ترويض',
+    testimonial1Quote: 'أنقذ الدكتور نولتينغ مسيرة حصاني. بعد إصابة خطيرة في الوتر، اعتقدت أن كل شيء انتهى. بفضل خبرته في الطب التجديدي، يتنافس حصاني مرة أخرى على أعلى مستوى.',
+    testimonial2Name: 'هانز ويبر',
+    testimonial2Role: 'فارس قفز محترف',
+    testimonial2Quote: 'في 15 عاماً من المنافسة الدولية، لم أقابل طبيباً بيطرياً بهذه الكفاءة والتفاني. معرفته العميقة بجراحة عظام الخيول لا مثيل لها.',
+    testimonial3Name: 'صوفي لوران',
+    testimonial3Role: 'مدربة فروسية',
+    testimonial3Quote: 'نعهد بجميع خيول المنافسة لدينا إلى الدكتور نولتينغ. نهجه الوقائي وتشخيصاته الدقيقة ساعدتنا على تجنب العديد من الإصابات الخطيرة.',
+    
+    // FAQ
+    faqTag: 'الأسئلة الشائعة',
+    faqTitle: 'الأسئلة الشائعة',
+    faqSubtitle: 'ابحث عن إجابات للأسئلة الأكثر شيوعاً',
+    faq1Question: 'ما هي أنواع الإصابات التي تعالجونها في أغلب الأحيان؟',
+    faq1Answer: 'نعالج بشكل رئيسي الإصابات العظمية: التهاب الأوتار، إصابات المفاصل، الكسور، مشاكل الظهر والحركة. خبرتنا تغطي النظام العضلي الهيكلي الكامل للحصان، من الحوافر إلى العمود الفقري.',
+    faq2Question: 'كيف تتم الاستشارة الأولى؟',
+    faq2Answer: 'تشمل الاستشارة الأولى فحصاً سريرياً كاملاً، تحليل المشية، وعند الحاجة، دراسات التصوير (الأشعة السينية، الموجات فوق الصوتية، التصوير بالرنين المغناطيسي). نأخذ الوقت لفهم التاريخ الكامل لحصانك وأهدافك.',
+    faq3Question: 'هل تقدمون زيارات منزلية أو استشارات في الموقع؟',
+    faq3Answer: 'نعم، نسافر في جميع أنحاء أوروبا للاستشارات وحالات الطوارئ ورعاية خيول المنافسة. نحضر أيضاً الأحداث الدولية الكبرى للفروسية.',
+    faq4Question: 'ما هي أوقات التعافي النموذجية بعد الجراحة؟',
+    faq4Answer: 'تختلف الأوقات حسب نوع الإجراء. قد يسمح تنظير المفصل البسيط بالعودة إلى العمل في 4-6 أسابيع، بينما قد تتطلب إعادة بناء الوتر 6-12 شهراً. كل بروتوكول مخصص للمريض.',
+    faq5Question: 'هل تستخدمون علاجات الطب التجديدي؟',
+    faq5Answer: 'بالتأكيد. نحن رواد في استخدام العلاج بالخلايا الجذعية، البلازما الغنية بالصفائح (PRP)، وIRAP. هذه العلاجات البيولوجية تسرع الشفاء وتحسن جودة الأنسجة المُصلحة.',
+    faq6Question: 'كيف يمكنني حجز موعد؟',
+    faq6Answer: 'يمكنك الاتصال بنا عبر الهاتف أو البريد الإلكتروني أو نموذج الاتصال على هذا الموقع. للطوارئ، يتوفر خط مخصص على مدار الساعة طوال أيام الأسبوع. نرد عادةً خلال 24 ساعة.',
+    
+    // Gallery
+    galleryTag: 'معرض الصور',
+    galleryTitle: 'عيادتنا بالصور',
+    gallerySubtitle: 'اكتشف مرافقنا وعملنا اليومي',
+    galleryAll: 'الكل',
+    gallerySurgery: 'الجراحة',
+    galleryTreatments: 'العلاجات',
+    galleryDiagnostics: 'التشخيص',
+    galleryExams: 'الفحوصات',
+    galleryPatients: 'المرضى',
+    galleryRecovery: 'التعافي',
+    galleryClinic: 'العيادة',
+    galleryImage1: 'غرفة جراحة خيول حديثة',
+    galleryImage2: 'علاج تجديدي بالبلازما',
+    galleryImage3: 'تشخيص بالموجات فوق الصوتية',
+    galleryImage4: 'فحص عظمي',
+    galleryImage5: 'صورة حصان رياضي',
+    galleryImage6: 'حصان في مرحلة التعافي',
+    galleryImage7: 'تحليل الأشعة السينية',
+    galleryImage8: 'عيادة الخيول',
   },
 }
