@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { Calendar, MapPin, Trophy, Medal, Star, Globe } from 'lucide-react'
-import achievementsAward from '@/assets/achievements-award.jpg'
+import achievementsCertificate from '@/assets/achievements-certificate.jpg'
 
 export function Achievements() {
   const { t } = useLanguage()
@@ -70,8 +70,8 @@ export function Achievements() {
           >
             <div className="relative rounded-2xl overflow-hidden premium-shadow">
               <img 
-                src={achievementsAward} 
-                alt="Veterinary excellence awards"
+                src={achievementsCertificate} 
+                alt="Certificate of Veterinary Excellence - Dr. Björn Nolting"
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
