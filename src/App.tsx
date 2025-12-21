@@ -1,46 +1,29 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { LanguageProvider } from './contexts/LanguageContext'
-import { Hero } from './components/Hero'
-import { About } from './components/About'
-import { Services } from './components/Services'
-import { Expertise } from './components/Expertise'
-import { Achievements } from './components/Achievements'
-import { Contact } from './components/Contact'
-import { Footer } from './components/Footer'
 import { Toaster } from './components/ui/sonner'
-
-function AppContent() {
-  return (
-    <div className="min-h-screen bg-background text-foreground">
-      <main className="relative" role="main">
-        <section id="hero" aria-label="Hero section">
-          <Hero />
-        </section>
-        <section id="about" aria-label="About section">
-          <About />
-        </section>
-        <section id="services" aria-label="Services section">
-          <Services />
-        </section>
-        <section id="expertise" aria-label="Expertise section">
-          <Expertise />
-        </section>
-        <section id="achievements" aria-label="Achievements section">
-          <Achievements />
-        </section>
-        <section id="contact" aria-label="Contact section">
-          <Contact />
-        </section>
-      </main>
-      <Footer />
-      <Toaster />
-    </div>
-  )
-}
+import Index from './pages/Index'
+import AboutPage from './pages/AboutPage'
+import ServicesPage from './pages/ServicesPage'
+import ExpertisePage from './pages/ExpertisePage'
+import AchievementsPage from './pages/AchievementsPage'
+import ContactPage from './pages/ContactPage'
+import NotFound from './pages/NotFound'
 
 export default function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/expertise" element={<ExpertisePage />} />
+          <Route path="/achievements" element={<AchievementsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Toaster />
+      </BrowserRouter>
     </LanguageProvider>
   )
 }
