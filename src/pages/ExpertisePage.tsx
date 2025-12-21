@@ -1,4 +1,5 @@
 import { Expertise } from '@/components/Expertise'
+import { Gallery } from '@/components/Gallery'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 
@@ -8,6 +9,7 @@ export default function ExpertisePage() {
       <Navbar />
       <main className="relative pt-20" role="main">
         <Expertise />
+        <Gallery />
       </main>
       <Footer />
     </div>
