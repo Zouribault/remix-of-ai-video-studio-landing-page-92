@@ -79,17 +79,17 @@ export function Hero() {
           </motion.div>
           
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.7 }}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-primary drop-shadow-[0_4px_8px_rgba(255,255,255,0.9)]">
+            className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-white [text-shadow:_0_2px_12px_rgb(0_0_0_/_80%),_0_4px_24px_rgb(0_0_0_/_60%)]">
             {t('heroTitle')}
           </motion.h1>
           
           <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.9 }}
-            className="text-xl sm:text-2xl font-semibold mb-4 text-primary-foreground bg-primary/90 backdrop-blur-sm px-4 py-2 rounded-lg inline-block shadow-lg">
+            className="text-xl sm:text-2xl font-semibold mb-4 text-accent [text-shadow:_0_2px_8px_rgb(0_0_0_/_70%)]">
             {t('heroSubtitle')}
           </motion.p>
           
           <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.1 }}
-            className="text-lg max-w-2xl mb-10 text-primary-foreground bg-primary/80 backdrop-blur-sm px-4 py-3 rounded-lg shadow-lg">
+            className="text-lg max-w-2xl mb-10 text-white/90 [text-shadow:_0_2px_8px_rgb(0_0_0_/_70%)]">
             {t('heroDescription')}
           </motion.p>
           
