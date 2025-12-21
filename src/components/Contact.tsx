@@ -1,153 +1,102 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
+import { toast } from 'sonner'
 
 export function Contact() {
+  const { t } = useLanguage()
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' })
 
-  useEffect(() => {
-    // Load Cal.com embed script
-    const script = document.createElement('script')
-    script.type = 'text/javascript'
-    script.innerHTML = `
-      (function (C, A, L) { 
-        let p = function (a, ar) { a.q.push(ar); }; 
-        let d = C.document; 
-        C.Cal = C.Cal || function () { 
-          let cal = C.Cal; 
-          let ar = arguments; 
-          if (!cal.loaded) { 
-            cal.ns = {}; 
-            cal.q = cal.q || []; 
-            d.head.appendChild(d.createElement("script")).src = A; 
-            cal.loaded = true; 
-          } 
-          if (ar[0] === L) { 
-            const api = function () { p(api, arguments); }; 
-            const namespace = ar[1]; 
-            api.q = api.q || []; 
-            if(typeof namespace === "string"){
-              cal.ns[namespace] = cal.ns[namespace] || api;
-              p(cal.ns[namespace], ar);
-              p(cal, ["initNamespace", namespace]);
-            } else p(cal, ar); 
-            return;
-          } 
-          p(cal, ar); 
-        }; 
-      })(window, "https://app.cal.com/embed/embed.js", "init");
-      
-      Cal("init", "mojju-discovery-call", {origin:"https://app.cal.com"});
-      
-      Cal.ns["mojju-discovery-call"]("inline", {
-        elementOrSelector:"#my-cal-inline-mojju-discovery-call",
-        config: {"layout":"month_view"},
-        calLink: "mojli/30min",
-      });
-      
-      Cal.ns["mojju-discovery-call"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-    `
-    
-    document.body.appendChild(script)
-    
-    return () => {
-      // Cleanup script on unmount
-      if (document.body.contains(script)) {
-        document.body.removeChild(script)
-      }
-    }
-  }, [])
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    toast.success(t('contactSuccess'))
+    setFormData({ name: '', email: '', phone: '', message: '' })
+  }
 
   return (
-    <section id="contact" className="relative py-32 bg-card/30">
+    <section id="contact" className="relative py-24 bg-background">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-3 h-3 bg-accent-emerald rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-muted-foreground">
-              Let's Create Together
-            </span>
-            <div className="w-3 h-3 bg-accent-blue rounded-full animate-pulse" />
-          </div>
-          
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-8">
-            <span className="block mb-2">Ready to Light Up the Screen?</span>
-            
+          <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">
+            {t('contactTag')}
+          </span>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            {t('contactTitle')}
           </h2>
-          
-          <p className="text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Book a discovery call to discuss your project and see how we can bring your vision to cinematic reality
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            {t('contactSubtitle')}
           </p>
         </div>
 
-        {/* Cal.com Booking Widget */}
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-background clean-border rounded-3xl overflow-hidden elevated-shadow">
-            {/* Widget Header */}
-            <div className="bg-card/50 px-8 py-6 border-b border-border">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-black text-foreground mb-1">
-                    MOJJU Discovery Call
-                  </h3>
-                  <p className="text-muted-foreground">
-                    30 minutes • Video call • Free consultation
-                  </p>
-                </div>
-                <div className="hidden sm:flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-accent-emerald rounded-full" />
-                  <span className="text-sm text-muted-foreground font-medium">Available now</span>
-                </div>
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">{t('contactName')}</label>
+                <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-3 bg-card border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent" />
               </div>
-            </div>
-            
-            {/* Cal.com Embed Container */}
-            <div className="p-0 bg-white">
-              <div 
-                style={{
-                  width: '100%',
-                  height: '600px',
-                  overflow: 'scroll'
-                }} 
-                id="my-cal-inline-mojju-discovery-call"
-              />
-            </div>
-          </div>
-        </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">{t('contactEmail')}</label>
+                <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-3 bg-card border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">{t('contactPhone')}</label>
+                <input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full px-4 py-3 bg-card border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">{t('contactMessage')}</label>
+                <textarea required rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-4 py-3 bg-card border border-border rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent resize-none" />
+              </div>
+              <button type="submit" className="w-full gold-accent font-semibold px-6 py-4 rounded-lg flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform">
+                <Send className="w-5 h-5" />
+                {t('contactSend')}
+              </button>
+            </form>
+          </motion.div>
 
-        {/* Bottom Info */}
-        <div className="text-center mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-blue rounded-full" />
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+            className="space-y-8">
+            <div className="p-6 bg-card rounded-2xl border border-border">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+                  <MapPin className="w-6 h-6 text-accent" />
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-foreground">{t('contactAddress')}</h4>
+                  <p className="text-muted-foreground">Equine Clinic</p>
+                </div>
               </div>
-              <h4 className="font-black text-foreground mb-2">Project Discussion</h4>
-              <p className="text-muted-foreground text-sm">
-                Share your vision and requirements with our team
-              </p>
             </div>
-            
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-emerald/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-emerald rounded-full" />
+            <div className="p-6 bg-card rounded-2xl border border-border">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+                  <Mail className="w-6 h-6 text-accent" />
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-foreground">Email</h4>
+                  <p className="text-muted-foreground">contact@dr-nolting.com</p>
+                </div>
               </div>
-              <h4 className="font-black text-foreground mb-2">Custom Strategy</h4>
-              <p className="text-muted-foreground text-sm">
-                Get a tailored approach for your unique project
-              </p>
             </div>
-            
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-purple rounded-full" />
+            <div className="p-6 bg-card rounded-2xl border border-border">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+                  <Phone className="w-6 h-6 text-accent" />
+                </div>
+                <div>
+                  <h4 className="font-display font-bold text-foreground">{t('contactPhone')}</h4>
+                  <p className="text-muted-foreground">+49 XXX XXXXXXX</p>
+                </div>
               </div>
-              <h4 className="font-black text-foreground mb-2">Next Steps</h4>
-              <p className="text-muted-foreground text-sm">
-                Clear timeline and roadmap to bring your idea to life
-              </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
