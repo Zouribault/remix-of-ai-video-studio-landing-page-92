@@ -1,5 +1,3 @@
-'use client'
-
 import { motion } from 'framer-motion'
 import { Menu, X, ChevronDown, Globe } from 'lucide-react'
 import { useState, useEffect } from 'react'

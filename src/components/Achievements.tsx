@@ -1,5 +1,3 @@
-'use client'
-
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 import achievementsAward from '@/assets/achievements-award.jpg'
