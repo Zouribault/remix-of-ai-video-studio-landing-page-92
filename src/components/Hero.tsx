@@ -2,9 +2,215 @@
 
 import { motion } from 'framer-motion'
 import { Menu, X, ChevronDown, Globe } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense, useRef } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls, Environment, Float } from '@react-three/drei'
 import { useLanguage, languages } from '@/contexts/LanguageContext'
-import horseRecovery from '@/assets/horse-recovery.jpg'
+import * as THREE from 'three'
+
+// Stylized 3D Horse Component
+function Horse3D() {
+  const groupRef = useRef<THREE.Group>(null)
+  
+  useFrame((state) => {
+    if (groupRef.current) {
+      // Gentle breathing/bobbing animation
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.15
+      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.1 + 0.3
+    }
+  })
+
+  const bodyMaterial = new THREE.MeshStandardMaterial({ 
+    color: '#8B4513', 
+    roughness: 0.4, 
+    metalness: 0.3 
+  })
+  
+  const accentMaterial = new THREE.MeshStandardMaterial({ 
+    color: '#c8a03c', 
+    roughness: 0.2, 
+    metalness: 0.8 
+  })
+
+  const darkMaterial = new THREE.MeshStandardMaterial({ 
+    color: '#2d1810', 
+    roughness: 0.6, 
+    metalness: 0.1 
+  })
+
+  return (
+    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
+      <group ref={groupRef} position={[0, -0.5, 0]} scale={1.2}>
+        {/* Body - Main torso */}
+        <mesh position={[0, 0, 0]} material={bodyMaterial}>
+          <capsuleGeometry args={[0.8, 1.5, 8, 16]} />
+        </mesh>
+        
+        {/* Chest */}
+        <mesh position={[0.9, 0.2, 0]} rotation={[0, 0, -0.3]} material={bodyMaterial}>
+          <sphereGeometry args={[0.7, 16, 16]} />
+        </mesh>
+        
+        {/* Hindquarters */}
+        <mesh position={[-0.9, 0.1, 0]} rotation={[0, 0, 0.2]} material={bodyMaterial}>
+          <sphereGeometry args={[0.75, 16, 16]} />
+        </mesh>
+        
+        {/* Neck */}
+        <mesh position={[1.3, 0.8, 0]} rotation={[0, 0, 0.8]} material={bodyMaterial}>
+          <capsuleGeometry args={[0.35, 1.2, 8, 16]} />
+        </mesh>
+        
+        {/* Head */}
+        <mesh position={[1.8, 1.6, 0]} rotation={[0, 0, 0.4]} material={bodyMaterial}>
+          <capsuleGeometry args={[0.25, 0.6, 8, 16]} />
+        </mesh>
+        
+        {/* Snout */}
+        <mesh position={[2.2, 1.4, 0]} rotation={[0, 0, 0.2]} material={bodyMaterial}>
+          <boxGeometry args={[0.5, 0.3, 0.35]} />
+        </mesh>
+        
+        {/* Ears */}
+        <mesh position={[1.6, 2.0, 0.15]} rotation={[0.2, 0, 0.3]} material={darkMaterial}>
+          <coneGeometry args={[0.08, 0.25, 8]} />
+        </mesh>
+        <mesh position={[1.6, 2.0, -0.15]} rotation={[-0.2, 0, 0.3]} material={darkMaterial}>
+          <coneGeometry args={[0.08, 0.25, 8]} />
+        </mesh>
+        
+        {/* Eyes */}
+        <mesh position={[2.0, 1.7, 0.2]} material={darkMaterial}>
+          <sphereGeometry args={[0.06, 8, 8]} />
+        </mesh>
+        <mesh position={[2.0, 1.7, -0.2]} material={darkMaterial}>
+          <sphereGeometry args={[0.06, 8, 8]} />
+        </mesh>
+        
+        {/* Mane */}
+        {[...Array(8)].map((_, i) => (
+          <mesh 
+            key={i} 
+            position={[1.3 - i * 0.15, 1.4 - i * 0.08, 0]} 
+            rotation={[0, 0, 0.5 + i * 0.1]}
+            material={darkMaterial}
+          >
+            <capsuleGeometry args={[0.06, 0.3 + i * 0.02, 4, 8]} />
+          </mesh>
+        ))}
+        
+        {/* Front legs */}
+        <mesh position={[0.6, -0.9, 0.3]} material={bodyMaterial}>
+          <capsuleGeometry args={[0.12, 0.8, 8, 16]} />
+        </mesh>
+        <mesh position={[0.6, -0.9, -0.3]} material={bodyMaterial}>
+          <capsuleGeometry args={[0.12, 0.8, 8, 16]} />
+        </mesh>
+        
+        {/* Back legs */}
+        <mesh position={[-0.7, -0.85, 0.35]} rotation={[0, 0, 0.1]} material={bodyMaterial}>
+          <capsuleGeometry args={[0.14, 0.75, 8, 16]} />
+        </mesh>
+        <mesh position={[-0.7, -0.85, -0.35]} rotation={[0, 0, 0.1]} material={bodyMaterial}>
+          <capsuleGeometry args={[0.14, 0.75, 8, 16]} />
+        </mesh>
+        
+        {/* Hooves */}
+        <mesh position={[0.6, -1.45, 0.3]} material={darkMaterial}>
+          <cylinderGeometry args={[0.1, 0.12, 0.15, 8]} />
+        </mesh>
+        <mesh position={[0.6, -1.45, -0.3]} material={darkMaterial}>
+          <cylinderGeometry args={[0.1, 0.12, 0.15, 8]} />
+        </mesh>
+        <mesh position={[-0.7, -1.4, 0.35]} material={darkMaterial}>
+          <cylinderGeometry args={[0.1, 0.12, 0.15, 8]} />
+        </mesh>
+        <mesh position={[-0.7, -1.4, -0.35]} material={darkMaterial}>
+          <cylinderGeometry args={[0.1, 0.12, 0.15, 8]} />
+        </mesh>
+        
+        {/* Tail */}
+        <mesh position={[-1.5, 0.3, 0]} rotation={[0, 0, -0.8]} material={darkMaterial}>
+          <capsuleGeometry args={[0.08, 0.8, 4, 8]} />
+        </mesh>
+        <mesh position={[-1.8, -0.2, 0]} rotation={[0, 0, -1.2]} material={darkMaterial}>
+          <capsuleGeometry args={[0.06, 0.6, 4, 8]} />
+        </mesh>
+        
+        {/* Golden harness/decoration */}
+        <mesh position={[1.0, 0.5, 0]} rotation={[Math.PI / 2, 0, 0]} material={accentMaterial}>
+          <torusGeometry args={[0.45, 0.03, 8, 32]} />
+        </mesh>
+        <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]} material={accentMaterial}>
+          <torusGeometry args={[0.85, 0.02, 8, 32]} />
+        </mesh>
+      </group>
+    </Float>
+  )
+}
+
+// Particle system for atmosphere
+function Particles() {
+  const particlesRef = useRef<THREE.Points>(null)
+  const count = 200
+  
+  const positions = new Float32Array(count * 3)
+  for (let i = 0; i < count * 3; i += 3) {
+    positions[i] = (Math.random() - 0.5) * 15
+    positions[i + 1] = (Math.random() - 0.5) * 10
+    positions[i + 2] = (Math.random() - 0.5) * 10
+  }
+  
+  useFrame((state) => {
+    if (particlesRef.current) {
+      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.02
+    }
+  })
+  
+  return (
+    <points ref={particlesRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={count}
+          array={positions}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial size={0.03} color="#c8a03c" transparent opacity={0.6} />
+    </points>
+  )
+}
+
+function Scene3D() {
+  return (
+    <Canvas camera={{ position: [5, 2, 5], fov: 50 }}>
+      <color attach="background" args={['#0a1f15']} />
+      <fog attach="fog" args={['#0a1f15', 8, 20]} />
+      
+      <ambientLight intensity={0.3} />
+      <directionalLight position={[5, 5, 5]} intensity={1.5} color="#ffffff" />
+      <pointLight position={[-5, 3, -5]} intensity={0.8} color="#c8a03c" />
+      <pointLight position={[3, -2, 3]} intensity={0.4} color="#2d5a47" />
+      <spotLight position={[0, 8, 0]} intensity={0.6} angle={0.5} color="#ffffff" />
+      
+      <Suspense fallback={null}>
+        <Horse3D />
+        <Particles />
+        <Environment preset="forest" />
+      </Suspense>
+      
+      <OrbitControls 
+        enableZoom={false} 
+        enablePan={false}
+        autoRotate 
+        autoRotateSpeed={0.3}
+        minPolarAngle={Math.PI / 3}
+        maxPolarAngle={Math.PI / 2}
+      />
+    </Canvas>
+  )
+}
 
 export function Hero() {
   const { t, language, setLanguage } = useLanguage()
@@ -22,16 +228,14 @@ export function Hero() {
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-      {/* Hero Background Image */}
+      {/* 3D Horse Background */}
       <div className="absolute inset-0">
-        <img 
-          src={horseRecovery} 
-          alt="Beautiful sport horse in recovery" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        <Scene3D />
       </div>
+
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/40 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
 
       {/* Navbar */}
       <motion.nav
