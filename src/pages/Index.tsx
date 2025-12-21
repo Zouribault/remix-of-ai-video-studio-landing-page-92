@@ -1,4 +1,8 @@
 import { Hero } from '@/components/Hero'
+import { About } from '@/components/About'
+import { Services } from '@/components/Services'
+import { Testimonials } from '@/components/Testimonials'
+import { Contact } from '@/components/Contact'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 
@@ -8,6 +12,10 @@ export default function Index() {
       <Navbar />
       <main className="relative" role="main">
         <Hero />
+        <About />
+        <Services />
+        <Testimonials />
+        <Contact />
       </main>
       <Footer />
     </div>
