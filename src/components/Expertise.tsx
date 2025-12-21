@@ -1,5 +1,3 @@
-'use client'
-
 import { motion } from 'framer-motion'
 import { Bone, Activity, Shield, Award } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
