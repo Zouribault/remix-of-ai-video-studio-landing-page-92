@@ -2,7 +2,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import heroReception from '@/assets/hero-reception.jpg'
 import heroClinicExterior from '@/assets/hero-clinic-exterior.jpg'
 
@@ -18,9 +17,6 @@ export function Hero() {
     }, 6000)
     return () => clearInterval(timer)
   }, [])
-
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % heroImages.length)
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length)
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
@@ -41,20 +37,6 @@ export function Hero() {
           />
         </motion.div>
       </AnimatePresence>
-
-      {/* Navigation Arrows */}
-      <button 
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition-all"
-      >
-        <ChevronLeft className="w-6 h-6 text-white" />
-      </button>
-      <button 
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition-all"
-      >
-        <ChevronRight className="w-6 h-6 text-white" />
-      </button>
 
       {/* Dots Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
@@ -79,21 +61,11 @@ export function Hero() {
           </motion.div>
           
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.7 }}
-            className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-white [text-shadow:_0_2px_12px_rgb(0_0_0_/_80%),_0_4px_24px_rgb(0_0_0_/_60%)]">
+            className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-10 text-white [text-shadow:_0_2px_12px_rgb(0_0_0_/_80%),_0_4px_24px_rgb(0_0_0_/_60%)]">
             {t('heroTitle')}
           </motion.h1>
           
-          <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.9 }}
-            className="text-xl sm:text-2xl font-semibold mb-4 text-accent [text-shadow:_0_2px_8px_rgb(0_0_0_/_70%)]">
-            {t('heroSubtitle')}
-          </motion.p>
-          
-          <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.1 }}
-            className="text-lg max-w-2xl mb-10 text-white/90 [text-shadow:_0_2px_8px_rgb(0_0_0_/_70%)]">
-            {t('heroDescription')}
-          </motion.p>
-          
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.3 }}
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.9 }}
             className="flex flex-wrap gap-4">
             <Link to="/contact" className="bg-accent text-accent-foreground font-semibold px-8 py-4 rounded-lg text-lg hover:scale-105 transition-transform shadow-xl">
               {t('heroCTA')}
