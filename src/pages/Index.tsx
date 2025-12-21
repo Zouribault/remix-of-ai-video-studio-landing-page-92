@@ -1,6 +1,8 @@
 import { Hero } from '@/components/Hero'
 import { About } from '@/components/About'
 import { Services } from '@/components/Services'
+import { Equipment } from '@/components/Equipment'
+import { TrustBadges } from '@/components/TrustBadges'
 import { Testimonials } from '@/components/Testimonials'
 import { Contact } from '@/components/Contact'
 import { Navbar } from '@/components/Navbar'
@@ -13,7 +15,9 @@ export default function Index() {
       <main className="relative" role="main">
         <Hero />
         <About />
+        <TrustBadges />
         <Services />
+        <Equipment />
         <Testimonials />
         <Contact />
       </main>
