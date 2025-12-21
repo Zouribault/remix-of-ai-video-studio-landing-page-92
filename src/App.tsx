@@ -2,6 +2,8 @@ import { LanguageProvider } from './contexts/LanguageContext'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
 import { Services } from './components/Services'
+import { Expertise } from './components/Expertise'
+import { Achievements } from './components/Achievements'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { Toaster } from './components/ui/sonner'
@@ -18,6 +20,12 @@ function AppContent() {
         </section>
         <section id="services" aria-label="Services section">
           <Services />
+        </section>
+        <section id="expertise" aria-label="Expertise section">
+          <Expertise />
+        </section>
+        <section id="achievements" aria-label="Achievements section">
+          <Achievements />
         </section>
         <section id="contact" aria-label="Contact section">
           <Contact />
