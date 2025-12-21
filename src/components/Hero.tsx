@@ -8,15 +8,137 @@ import { OrbitControls, Environment, Float } from '@react-three/drei'
 import { useLanguage, languages } from '@/contexts/LanguageContext'
 import * as THREE from 'three'
 
-// Stylized 3D Horse Component
+// Animated Leg Component
+function AnimatedLeg({ 
+  position, 
+  phase, 
+  isBack = false,
+  bodyMaterial,
+  darkMaterial
+}: { 
+  position: [number, number, number]
+  phase: number
+  isBack?: boolean
+  bodyMaterial: THREE.MeshStandardMaterial
+  darkMaterial: THREE.MeshStandardMaterial
+}) {
+  const legRef = useRef<THREE.Group>(null)
+  
+  useFrame((state) => {
+    if (legRef.current) {
+      const time = state.clock.elapsedTime * 3 + phase
+      // Galloping motion - legs swing back and forth
+      const swing = Math.sin(time) * 0.6
+      const lift = Math.max(0, Math.sin(time)) * 0.3
+      
+      legRef.current.rotation.z = swing * (isBack ? 0.8 : 1)
+      legRef.current.position.y = position[1] + lift
+    }
+  })
+  
+  return (
+    <group ref={legRef} position={position}>
+      {/* Upper leg */}
+      <mesh position={[0, -0.2, 0]} material={bodyMaterial}>
+        <capsuleGeometry args={[isBack ? 0.14 : 0.12, 0.4, 8, 16]} />
+      </mesh>
+      {/* Lower leg */}
+      <mesh position={[0, -0.6, 0]} material={bodyMaterial}>
+        <capsuleGeometry args={[0.08, 0.35, 8, 16]} />
+      </mesh>
+      {/* Hoof */}
+      <mesh position={[0, -0.95, 0]} material={darkMaterial}>
+        <cylinderGeometry args={[0.08, 0.1, 0.12, 8]} />
+      </mesh>
+    </group>
+  )
+}
+
+// Animated Tail Component
+function AnimatedTail({ darkMaterial }: { darkMaterial: THREE.MeshStandardMaterial }) {
+  const tailRef = useRef<THREE.Group>(null)
+  
+  useFrame((state) => {
+    if (tailRef.current) {
+      const time = state.clock.elapsedTime
+      tailRef.current.rotation.z = -0.8 + Math.sin(time * 2) * 0.3
+      tailRef.current.rotation.x = Math.sin(time * 3) * 0.2
+    }
+  })
+  
+  return (
+    <group ref={tailRef} position={[-1.5, 0.3, 0]}>
+      <mesh material={darkMaterial}>
+        <capsuleGeometry args={[0.08, 0.8, 4, 8]} />
+      </mesh>
+      <mesh position={[-0.3, -0.5, 0]} rotation={[0, 0, -0.4]} material={darkMaterial}>
+        <capsuleGeometry args={[0.06, 0.6, 4, 8]} />
+      </mesh>
+      <mesh position={[-0.5, -0.9, 0]} rotation={[0, 0, -0.3]} material={darkMaterial}>
+        <capsuleGeometry args={[0.04, 0.4, 4, 8]} />
+      </mesh>
+    </group>
+  )
+}
+
+// Animated Mane Component
+function AnimatedMane({ darkMaterial }: { darkMaterial: THREE.MeshStandardMaterial }) {
+  const maneRefs = useRef<THREE.Mesh[]>([])
+  
+  useFrame((state) => {
+    maneRefs.current.forEach((mesh, i) => {
+      if (mesh) {
+        const time = state.clock.elapsedTime
+        mesh.rotation.z = 0.5 + i * 0.1 + Math.sin(time * 4 + i * 0.5) * 0.15
+        mesh.rotation.x = Math.sin(time * 3 + i * 0.3) * 0.1
+      }
+    })
+  })
+  
+  return (
+    <>
+      {[...Array(10)].map((_, i) => (
+        <mesh 
+          key={i}
+          ref={(el) => { if (el) maneRefs.current[i] = el }}
+          position={[1.3 - i * 0.12, 1.4 - i * 0.06, 0]} 
+          material={darkMaterial}
+        >
+          <capsuleGeometry args={[0.05, 0.25 + i * 0.03, 4, 8]} />
+        </mesh>
+      ))}
+    </>
+  )
+}
+
+// Stylized 3D Horse Component with Galloping Animation
 function Horse3D() {
   const groupRef = useRef<THREE.Group>(null)
+  const bodyRef = useRef<THREE.Group>(null)
+  const headRef = useRef<THREE.Group>(null)
   
   useFrame((state) => {
     if (groupRef.current) {
-      // Gentle breathing/bobbing animation
-      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.15
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.1 + 0.3
+      const time = state.clock.elapsedTime
+      // Body bouncing with gallop
+      groupRef.current.position.y = -0.5 + Math.abs(Math.sin(time * 3)) * 0.2
+      // Slight forward/back motion
+      groupRef.current.position.x = Math.sin(time * 3) * 0.1
+      // Subtle rotation
+      groupRef.current.rotation.y = Math.sin(time * 0.5) * 0.15 + 0.3
+    }
+    
+    if (bodyRef.current) {
+      const time = state.clock.elapsedTime
+      // Body pitch during gallop
+      bodyRef.current.rotation.z = Math.sin(time * 3) * 0.05
+    }
+    
+    if (headRef.current) {
+      const time = state.clock.elapsedTime
+      // Head bobbing
+      headRef.current.rotation.z = 0.4 + Math.sin(time * 3 + 0.5) * 0.1
+      headRef.current.position.y = 1.6 + Math.sin(time * 3) * 0.08
     }
   })
 
@@ -39,8 +161,9 @@ function Horse3D() {
   })
 
   return (
-    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
-      <group ref={groupRef} position={[0, -0.5, 0]} scale={1.2}>
+    <group ref={groupRef} position={[0, -0.5, 0]} scale={1.2}>
+      {/* Body Group */}
+      <group ref={bodyRef}>
         {/* Body - Main torso */}
         <mesh position={[0, 0, 0]} material={bodyMaterial}>
           <capsuleGeometry args={[0.8, 1.5, 8, 16]} />
@@ -61,82 +184,6 @@ function Horse3D() {
           <capsuleGeometry args={[0.35, 1.2, 8, 16]} />
         </mesh>
         
-        {/* Head */}
-        <mesh position={[1.8, 1.6, 0]} rotation={[0, 0, 0.4]} material={bodyMaterial}>
-          <capsuleGeometry args={[0.25, 0.6, 8, 16]} />
-        </mesh>
-        
-        {/* Snout */}
-        <mesh position={[2.2, 1.4, 0]} rotation={[0, 0, 0.2]} material={bodyMaterial}>
-          <boxGeometry args={[0.5, 0.3, 0.35]} />
-        </mesh>
-        
-        {/* Ears */}
-        <mesh position={[1.6, 2.0, 0.15]} rotation={[0.2, 0, 0.3]} material={darkMaterial}>
-          <coneGeometry args={[0.08, 0.25, 8]} />
-        </mesh>
-        <mesh position={[1.6, 2.0, -0.15]} rotation={[-0.2, 0, 0.3]} material={darkMaterial}>
-          <coneGeometry args={[0.08, 0.25, 8]} />
-        </mesh>
-        
-        {/* Eyes */}
-        <mesh position={[2.0, 1.7, 0.2]} material={darkMaterial}>
-          <sphereGeometry args={[0.06, 8, 8]} />
-        </mesh>
-        <mesh position={[2.0, 1.7, -0.2]} material={darkMaterial}>
-          <sphereGeometry args={[0.06, 8, 8]} />
-        </mesh>
-        
-        {/* Mane */}
-        {[...Array(8)].map((_, i) => (
-          <mesh 
-            key={i} 
-            position={[1.3 - i * 0.15, 1.4 - i * 0.08, 0]} 
-            rotation={[0, 0, 0.5 + i * 0.1]}
-            material={darkMaterial}
-          >
-            <capsuleGeometry args={[0.06, 0.3 + i * 0.02, 4, 8]} />
-          </mesh>
-        ))}
-        
-        {/* Front legs */}
-        <mesh position={[0.6, -0.9, 0.3]} material={bodyMaterial}>
-          <capsuleGeometry args={[0.12, 0.8, 8, 16]} />
-        </mesh>
-        <mesh position={[0.6, -0.9, -0.3]} material={bodyMaterial}>
-          <capsuleGeometry args={[0.12, 0.8, 8, 16]} />
-        </mesh>
-        
-        {/* Back legs */}
-        <mesh position={[-0.7, -0.85, 0.35]} rotation={[0, 0, 0.1]} material={bodyMaterial}>
-          <capsuleGeometry args={[0.14, 0.75, 8, 16]} />
-        </mesh>
-        <mesh position={[-0.7, -0.85, -0.35]} rotation={[0, 0, 0.1]} material={bodyMaterial}>
-          <capsuleGeometry args={[0.14, 0.75, 8, 16]} />
-        </mesh>
-        
-        {/* Hooves */}
-        <mesh position={[0.6, -1.45, 0.3]} material={darkMaterial}>
-          <cylinderGeometry args={[0.1, 0.12, 0.15, 8]} />
-        </mesh>
-        <mesh position={[0.6, -1.45, -0.3]} material={darkMaterial}>
-          <cylinderGeometry args={[0.1, 0.12, 0.15, 8]} />
-        </mesh>
-        <mesh position={[-0.7, -1.4, 0.35]} material={darkMaterial}>
-          <cylinderGeometry args={[0.1, 0.12, 0.15, 8]} />
-        </mesh>
-        <mesh position={[-0.7, -1.4, -0.35]} material={darkMaterial}>
-          <cylinderGeometry args={[0.1, 0.12, 0.15, 8]} />
-        </mesh>
-        
-        {/* Tail */}
-        <mesh position={[-1.5, 0.3, 0]} rotation={[0, 0, -0.8]} material={darkMaterial}>
-          <capsuleGeometry args={[0.08, 0.8, 4, 8]} />
-        </mesh>
-        <mesh position={[-1.8, -0.2, 0]} rotation={[0, 0, -1.2]} material={darkMaterial}>
-          <capsuleGeometry args={[0.06, 0.6, 4, 8]} />
-        </mesh>
-        
         {/* Golden harness/decoration */}
         <mesh position={[1.0, 0.5, 0]} rotation={[Math.PI / 2, 0, 0]} material={accentMaterial}>
           <torusGeometry args={[0.45, 0.03, 8, 32]} />
@@ -145,7 +192,48 @@ function Horse3D() {
           <torusGeometry args={[0.85, 0.02, 8, 32]} />
         </mesh>
       </group>
-    </Float>
+      
+      {/* Head Group - Animated separately */}
+      <group ref={headRef} position={[1.8, 1.6, 0]}>
+        {/* Head */}
+        <mesh rotation={[0, 0, 0]} material={bodyMaterial}>
+          <capsuleGeometry args={[0.25, 0.6, 8, 16]} />
+        </mesh>
+        
+        {/* Snout */}
+        <mesh position={[0.4, -0.2, 0]} rotation={[0, 0, -0.2]} material={bodyMaterial}>
+          <boxGeometry args={[0.5, 0.3, 0.35]} />
+        </mesh>
+        
+        {/* Ears */}
+        <mesh position={[-0.2, 0.4, 0.15]} rotation={[0.2, 0, 0.3]} material={darkMaterial}>
+          <coneGeometry args={[0.08, 0.25, 8]} />
+        </mesh>
+        <mesh position={[-0.2, 0.4, -0.15]} rotation={[-0.2, 0, 0.3]} material={darkMaterial}>
+          <coneGeometry args={[0.08, 0.25, 8]} />
+        </mesh>
+        
+        {/* Eyes */}
+        <mesh position={[0.2, 0.1, 0.2]} material={darkMaterial}>
+          <sphereGeometry args={[0.06, 8, 8]} />
+        </mesh>
+        <mesh position={[0.2, 0.1, -0.2]} material={darkMaterial}>
+          <sphereGeometry args={[0.06, 8, 8]} />
+        </mesh>
+      </group>
+      
+      {/* Animated Mane */}
+      <AnimatedMane darkMaterial={darkMaterial} />
+      
+      {/* Animated Legs - with different phases for galloping */}
+      <AnimatedLeg position={[0.6, -0.5, 0.3]} phase={0} bodyMaterial={bodyMaterial} darkMaterial={darkMaterial} />
+      <AnimatedLeg position={[0.6, -0.5, -0.3]} phase={Math.PI} bodyMaterial={bodyMaterial} darkMaterial={darkMaterial} />
+      <AnimatedLeg position={[-0.7, -0.5, 0.35]} phase={Math.PI * 0.5} isBack bodyMaterial={bodyMaterial} darkMaterial={darkMaterial} />
+      <AnimatedLeg position={[-0.7, -0.5, -0.35]} phase={Math.PI * 1.5} isBack bodyMaterial={bodyMaterial} darkMaterial={darkMaterial} />
+      
+      {/* Animated Tail */}
+      <AnimatedTail darkMaterial={darkMaterial} />
+    </group>
   )
 }
 
