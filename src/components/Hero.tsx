@@ -54,13 +54,7 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 flex items-center min-h-screen px-6 sm:px-8 lg:px-12 pt-20">
         <div className="max-w-4xl">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5 }}>
-            <span className="inline-block px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium mb-6 shadow-lg">
-              🏆 {t('aboutTag')}
-            </span>
-          </motion.div>
-          
-          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.7 }}
+          <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5 }}
             className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-10 text-white [text-shadow:_0_2px_12px_rgb(0_0_0_/_80%),_0_4px_24px_rgb(0_0_0_/_60%)]">
             {t('heroTitle')}
           </motion.h1>
