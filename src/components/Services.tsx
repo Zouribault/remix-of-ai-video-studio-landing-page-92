@@ -2,232 +2,101 @@ import { motion } from 'framer-motion'
 import { Stethoscope, Scan, Heart, Activity, Trophy, Shield, CheckCircle, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { pick } from '@/lib/i18n'
+import type { Language } from '@/lib/translations'
 import equineSurgery from '@/assets/equine-surgery-room.jpg'
 import regenerativeTreatment from '@/assets/regenerative-treatment.jpg'
 import equineDiagnostics from '@/assets/equine-diagnostics.jpg'
 
+const copy: Record<Language, {
+  intro: string
+  s1: string[]; s2: string[]; s3: string[]; s4: string[]; s5: string[]; s6: string[]
+  feat1t: string; feat1s: string; feat2t: string; feat2s: string
+  procTitle: string; procSub: string
+  p1t: string; p1d: string; p2t: string; p2d: string; p3t: string; p3d: string; p4t: string; p4d: string
+  cta: string
+}> = {
+  de: { intro: 'Unsere Klinik ist mit modernster Technologie ausgestattet, um Versorgung auf höchstem Niveau zu bieten.', s1: ['Minimalinvasive Arthroskopie','Sehnen- und Bandchirurgie','Fraktur-Osteosynthese','Rücken-/Wirbelsäulenchirurgie'], s2: ['Digitale Hochauflösungsröntgen','Muskuloskelettaler Ultraschall','Pferde-MRT','Knochenszintigraphie'], s3: ['Stammzelltherapie','PRP-Injektionen','IRAP-Therapie','Extrakorporale Stoßwelle'], s4: ['Biomechanische Analyse','Beugetests','Diagnostische Anästhesien','Beurteilung auf dem Laufband'], s5: ['Betreuung von Turnierpferden','Präsenz bei internationalen Events','Leistungsoptimierung','Erholungsprotokolle nach Wettkampf'], s6: ['Regelmäßige Gesundheitschecks','Individuelle Präventionsprogramme','Ernährungsberatung','Optimierung der Hufbearbeitung'], feat1t: 'Präzise Diagnostik', feat1s: 'Bildgebung der neuesten Generation', feat2t: 'Regenerative Medizin', feat2s: 'Innovative biologische Therapien', procTitle: 'Unser Behandlungsprozess', procSub: 'Strukturierter Ablauf für optimale Ergebnisse', p1t: 'Erstberatung', p1d: 'Gründliche Untersuchung und Besprechung', p2t: 'Diagnostik', p2d: 'Modernste Geräte für präzise Diagnosen', p3t: 'Therapieplan', p3d: 'Individuelles Protokoll für Ihr Pferd', p4t: 'Nachsorge', p4d: 'Begleitung während der Rehabilitation', cta: 'Termin vereinbaren' },
+  en: { intro: 'Our clinic is equipped with the most advanced technologies to deliver top-quality care. Every treatment is tailored to your horse.', s1: ['Minimally invasive arthroscopy','Tendon & ligament surgery','Fracture osteosynthesis','Back & spine surgery'], s2: ['High-resolution digital radiography','Musculoskeletal ultrasound','Equine MRI','Bone scintigraphy'], s3: ['Stem cell therapy','PRP injections','IRAP therapy','Extracorporeal shockwave'], s4: ['Comprehensive biomechanical analysis','Flexion tests','Diagnostic nerve blocks','Treadmill evaluation'], s5: ['Competition horse care','On-site at international events','Performance optimization','Post-competition recovery protocols'], s6: ['Regular health checks','Personalized prevention programs','Nutritional guidance','Farriery optimization'], feat1t: 'Precision Diagnostics', feat1s: 'Next-generation imaging', feat2t: 'Regenerative Medicine', feat2s: 'Innovative biological treatments', procTitle: 'Our Care Process', procSub: 'A structured approach for optimal outcomes', p1t: 'Initial Consultation', p1d: 'Full clinical exam and discussion', p2t: 'Diagnostics', p2d: 'Cutting-edge equipment for accurate diagnosis', p3t: 'Treatment Plan', p3d: 'Personalized protocol for your horse', p4t: 'Follow-up', p4d: 'Support throughout recovery', cta: 'Book Appointment' },
+  fr: { intro: 'Notre clinique est équipée des technologies les plus avancées pour offrir des soins de la plus haute qualité.', s1: ['Arthroscopie mini-invasive','Chirurgie des tendons et ligaments','Ostéosynthèse des fractures','Chirurgie du dos et de la colonne'], s2: ['Radiographie numérique haute résolution','Échographie musculo-squelettique','IRM équine','Scintigraphie osseuse'], s3: ['Thérapie par cellules souches','Injections de PRP','Thérapie IRAP','Ondes de choc extracorporelles'], s4: ['Analyse biomécanique complète','Tests de flexion','Anesthésies diagnostiques','Évaluation sur tapis roulant'], s5: ['Suivi de chevaux de compétition','Présence sur les événements internationaux','Programmes de performance optimisée','Protocoles de récupération post-compétition'], s6: ['Bilans de santé réguliers','Programmes de prévention personnalisés','Conseils nutritionnels','Optimisation du ferrage'], feat1t: 'Diagnostic de Précision', feat1s: "Technologies d'imagerie de dernière génération", feat2t: 'Médecine Régénérative', feat2s: 'Traitements biologiques innovants', procTitle: 'Notre Processus de Soins', procSub: 'Une approche structurée pour des résultats optimaux', p1t: 'Consultation initiale', p1d: 'Examen clinique complet', p2t: 'Diagnostic', p2d: "Équipements de pointe pour un diagnostic précis", p3t: 'Plan de traitement', p3d: "Protocole personnalisé adapté à votre cheval", p4t: 'Suivi', p4d: 'Accompagnement tout au long de la récupération', cta: 'Prendre Rendez-vous' },
+  es: { intro: 'Nuestra clínica cuenta con tecnología avanzada para ofrecer atención de la más alta calidad.', s1: ['Artroscopia mínimamente invasiva','Cirugía de tendones y ligamentos','Osteosíntesis de fracturas','Cirugía de espalda y columna'], s2: ['Radiografía digital de alta resolución','Ecografía musculoesquelética','Resonancia magnética equina','Gammagrafía ósea'], s3: ['Terapia con células madre','Inyecciones de PRP','Terapia IRAP','Ondas de choque extracorpóreas'], s4: ['Análisis biomecánico completo','Pruebas de flexión','Bloqueos diagnósticos','Evaluación en cinta'], s5: ['Seguimiento de caballos de competición','Presencia en eventos internacionales','Programas de rendimiento','Protocolos de recuperación post-competición'], s6: ['Revisiones de salud periódicas','Programas de prevención personalizados','Asesoría nutricional','Optimización del herraje'], feat1t: 'Diagnóstico de Precisión', feat1s: 'Tecnología de imagen de última generación', feat2t: 'Medicina Regenerativa', feat2s: 'Tratamientos biológicos innovadores', procTitle: 'Nuestro proceso de atención', procSub: 'Un enfoque estructurado para resultados óptimos', p1t: 'Consulta inicial', p1d: 'Examen clínico completo', p2t: 'Diagnóstico', p2d: 'Equipos avanzados para diagnóstico preciso', p3t: 'Plan de tratamiento', p3d: 'Protocolo personalizado para tu caballo', p4t: 'Seguimiento', p4d: 'Acompañamiento en recuperación y rehabilitación', cta: 'Pedir cita' },
+  pt: { intro: 'A nossa clínica está equipada com tecnologias avançadas para oferecer cuidados da mais alta qualidade.', s1: ['Artroscopia minimamente invasiva','Cirurgia de tendões e ligamentos','Osteossíntese de fraturas','Cirurgia da coluna e dorso'], s2: ['Radiografia digital de alta resolução','Ecografia musculoesquelética','Ressonância magnética equina','Cintigrafia óssea'], s3: ['Terapia com células estaminais','Injeções de PRP','Terapia IRAP','Terapia por ondas de choque'], s4: ['Análise biomecânica completa','Testes de flexão','Bloqueios diagnósticos','Avaliação em passadeira'], s5: ['Acompanhamento de cavalos de competição','Presença em eventos internacionais','Programas de otimização','Protocolos de recuperação pós-competição'], s6: ['Check-ups regulares','Programas de prevenção personalizados','Aconselhamento nutricional','Otimização do ferrageamento'], feat1t: 'Diagnóstico de Precisão', feat1s: 'Tecnologias de imagem de última geração', feat2t: 'Medicina Regenerativa', feat2s: 'Tratamentos biológicos inovadores', procTitle: 'O nosso processo de cuidados', procSub: 'Uma abordagem estruturada para melhores resultados', p1t: 'Consulta inicial', p1d: 'Exame clínico completo', p2t: 'Diagnóstico', p2d: 'Equipamentos avançados para diagnóstico preciso', p3t: 'Plano de tratamento', p3d: 'Protocolo personalizado para o seu cavalo', p4t: 'Acompanhamento', p4d: 'Suporte durante recuperação e reabilitação', cta: 'Marcar consulta' },
+  it: { intro: 'La nostra clinica è dotata delle tecnologie più avanzate per offrire cure di altissima qualità.', s1: ['Artroscopia mini-invasiva','Chirurgia di tendini e legamenti','Osteosintesi delle fratture','Chirurgia di dorso e colonna'], s2: ['Radiografia digitale ad alta risoluzione','Ecografia muscolo-scheletrica','Risonanza magnetica equina','Scintigrafia ossea'], s3: ['Terapia con cellule staminali','Iniezioni di PRP','Terapia IRAP',"Onde d'urto extracorporee"], s4: ['Analisi biomeccanica completa','Test di flessione','Blocchi diagnostici','Valutazione su tapis roulant'], s5: ['Assistenza a cavalli da competizione','Presenza a eventi internazionali','Programmi di performance','Protocolli di recupero post-gara'], s6: ['Check-up regolari','Programmi di prevenzione personalizzati','Consigli nutrizionali','Ottimizzazione della ferratura'], feat1t: 'Diagnostica di Precisione', feat1s: 'Tecnologie di imaging di ultima generazione', feat2t: 'Medicina Rigenerativa', feat2s: 'Trattamenti biologici innovativi', procTitle: 'Il nostro processo di cura', procSub: 'Un approccio strutturato per risultati ottimali', p1t: 'Prima visita', p1d: 'Esame clinico completo', p2t: 'Diagnostica', p2d: 'Strumentazione all'avanguardia', p3t: 'Piano di trattamento', p3d: 'Protocollo personalizzato per il cavallo', p4t: 'Follow-up', p4d: 'Supporto durante recupero e riabilitazione', cta: 'Prenota un appuntamento' },
+  no: { intro: 'Klinikken vår er utstyrt med avansert teknologi for å tilby behandling på høyeste nivå.', s1: ['Minimalt invasiv artroskopi','Sene- og leddbåndskirurgi','Fraktur-osteosyntese','Rygg-/ryggsøylekirurgi'], s2: ['Digital røntgen i høy oppløsning','Muskuloskeletal ultralyd','Equine MR','Beinscintigrafi'], s3: ['Stamcelleterapi','PRP-injeksjoner','IRAP-terapi','Ekstrakorporal sjokkbølge'], s4: ['Biomekanisk analyse','Fleksjonstester','Diagnostiske blokader','Evaluering på tredemølle'], s5: ['Oppfølging av konkurransehester','Til stede på internasjonale arrangementer','Ytelsesprogrammer','Restitusjonsprotokoller etter konkurranse'], s6: ['Regelmessige helsesjekker','Tilpassede forebyggingsprogrammer','Ernæringsråd','Optimalisering av hovstell'], feat1t: 'Presis diagnostikk', feat1s: 'Bildebehandling av nyeste generasjon', feat2t: 'Regenerativ medisin', feat2s: 'Innovative biologiske behandlinger', procTitle: 'Vår behandlingsprosess', procSub: 'En strukturert tilnærming for best mulig resultat', p1t: 'Førstekonsultasjon', p1d: 'Grundig undersøkelse og gjennomgang', p2t: 'Diagnostikk', p2d: 'Avansert utstyr for presis diagnose', p3t: 'Behandlingsplan', p3d: 'Skreddersydd plan for hesten', p4t: 'Oppfølging', p4d: 'Støtte gjennom rehabilitering', cta: 'Bestill time' },
+  fi: { intro: 'Klinikkamme on varustettu uusimmalla teknologialla korkeatasoiseen hoitoon.', s1: ['Minimoinvasiivinen artroskopia','Jänne- ja nivelsidekirurgia','Murtumien osteosynteesi','Selän ja selkärangan kirurgia'], s2: ['Korkearesoluutioinen digitaaliröntgen','Tuki- ja liikuntaelimistön ultraääni','Hevosten MRI','Luustokartoitus'], s3: ['Kantasoluhoito','PRP-injektiot','IRAP-hoito','Shokkiaaltohoito'], s4: ['Laaja biomekaaninen analyysi','Taivutustestit','Diagnostiset puudutukset','Arviointi juoksumatolla'], s5: ['Kilpahevosten seuranta','Läsnäolo kansainvälisissä tapahtumissa','Suorituskyvyn optimointiohjelmat','Kilpailun jälkeiset palautumisprotokollat'], s6: ['Säännölliset terveystarkastukset','Yksilölliset ennaltaehkäisyohjelmat','Ravitsemusneuvonta','Kengityksen optimointi'], feat1t: 'Tarkka diagnostiikka', feat1s: 'Uusimman sukupolven kuvantaminen', feat2t: 'Regeneratiivinen lääketiede', feat2s: 'Innovatiiviset biologiset hoidot', procTitle: 'Hoitoprosessimme', procSub: 'Rakenteellinen lähestymistapa parhaisiin tuloksiin', p1t: 'Ensikäynti', p1d: 'Perusteellinen tutkimus', p2t: 'Diagnostiikka', p2d: 'Huipputason laitteet', p3t: 'Hoitosuunnitelma', p3d: 'Hevosellesi räätälöity protokolla', p4t: 'Seuranta', p4d: 'Tuki toipumisen aikana', cta: 'Varaa aika' },
+  sv: { intro: 'Vår klinik är utrustad med den mest avancerade tekniken för vård av högsta kvalitet.', s1: ['Minimalt invasiv artroskopi','Sen- och ligamentskirurgi','Osteosyntes vid frakturer','Rygg- och ryggradskirurgi'], s2: ['Digital röntgen i hög upplösning','Muskuloskeletal ultraljud','Häst-MR','Benscintigrafi'], s3: ['Stamcellsterapi','PRP-injektioner','IRAP-terapi','Extrakorporeal stötvåg'], s4: ['Biomekanisk analys','Böjprov','Diagnostiska bedövningar','Utvärdering på löpband'], s5: ['Stöd för tävlingshästar','Närvaro vid internationella evenemang','Prestandaprogram','Återhämtningsprotokoll'], s6: ['Regelbundna hälsokontroller','Personliga förebyggande program','Kostrådgivning','Optimering av skoning'], feat1t: 'Precisionsdiagnostik', feat1s: 'Nästa generations bildteknik', feat2t: 'Regenerativ medicin', feat2s: 'Innovativa biologiska behandlingar', procTitle: 'Vår vårdprocess', procSub: 'Ett strukturerat arbetssätt för bästa resultat', p1t: 'Första konsultation', p1d: 'Full klinisk undersökning', p2t: 'Diagnostik', p2d: 'Avancerad utrustning för exakt diagnos', p3t: 'Behandlingsplan', p3d: 'Personligt protokoll för din häst', p4t: 'Uppföljning', p4d: 'Stöd under återhämtningen', cta: 'Boka tid' },
+  nl: { intro: 'Onze kliniek is uitgerust met de meest geavanceerde technologie om zorg van topkwaliteit te leveren.', s1: ['Minimaal invasieve artroscopie','Pees- en bandchirurgie','Osteosynthese bij fracturen','Rug- en wervelkolomchirurgie'], s2: ['Digitale röntgen met hoge resolutie','Musculoskeletale echografie','Paarden-MRI','Botscintigrafie'], s3: ['Stamceltherapie','PRP-injecties','IRAP-therapie','Extracorporale shockwave'], s4: ['Uitgebreide biomechanische analyse','Buigproeven','Diagnostische verdovingen','Evaluatie op de loopband'], s5: ['Begeleiding van wedstrijdpaarden','Aanwezigheid op internationale evenementen',"Prestatie-optimalisatie",'Herstelprotocollen na wedstrijden'], s6: ['Regelmatige gezondheidscontroles',"Gepersonaliseerde preventieprogramma's",'Voedingsadvies','Optimalisatie van hoefverzorging'], feat1t: 'Precisiediagnostiek', feat1s: 'Beeldvorming van de nieuwste generatie', feat2t: 'Regeneratieve geneeskunde', feat2s: 'Innovatieve biologische behandelingen', procTitle: 'Ons zorgproces', procSub: 'Een gestructureerde aanpak voor optimale resultaten', p1t: 'Eerste consult', p1d: 'Volledig klinisch onderzoek', p2t: 'Diagnostiek', p2d: 'Geavanceerde apparatuur voor nauwkeurige diagnose', p3t: 'Behandelplan', p3d: 'Een protocol op maat voor uw paard', p4t: 'Nazorg', p4d: 'Begeleiding tijdens herstel', cta: 'Afspraak maken' },
+  ru: { intro: 'Наша клиника оснащена передовыми технологиями для лечения на высшем уровне.', s1: ['Миниинвазивная артроскопия','Хирургия сухожилий и связок','Остеосинтез переломов','Операции на спине и позвоночнике'], s2: ['Цифровой рентген высокой чёткости','УЗИ опорно-двигательного аппарата','МРТ лошади','Сцинтиграфия костей'], s3: ['Терапия стволовыми клетками','Инъекции PRP','Терапия IRAP','Ударно-волновая терапия'], s4: ['Биомеханический анализ','Тесты сгибания','Диагностические блокады','Оценка на беговой дорожке'], s5: ['Сопровождение спортивных лошадей','Присутствие на международных турнирах','Программы повышения результатов','Протоколы восстановления'], s6: ['Регулярные осмотры','Индивидуальная профилактика','Советы по питанию','Оптимизация ковки'], feat1t: 'Точная диагностика', feat1s: 'Современные технологии визуализации', feat2t: 'Регенеративная медицина', feat2s: 'Инновационные биологические методы', procTitle: 'Наш процесс лечения', procSub: 'Структурированный подход к лучшим результатам', p1t: 'Первичная консультация', p1d: 'Полный осмотр и обсуждение', p2t: 'Диагностика', p2d: 'Передовое оборудование для точного диагноза', p3t: 'План лечения', p3d: 'Индивидуальный протокол для вашей лошади', p4t: 'Наблюдение', p4d: 'Сопровождение во время реабилитации', cta: 'Записаться' },
+  zh: { intro: '我们的诊所配备先进设备，提供高标准的医疗服务。', s1: ['微创关节镜手术','肌腱与韧带手术','骨折内固定','背部与脊柱手术'], s2: ['高分辨率数字X光','肌骨超声','马科MRI','骨显像'], s3: ['干细胞治疗','PRP注射','IRAP治疗','体外冲击波'], s4: ['生物力学分析','屈曲试验','诊断性麻醉阻滞','跑台评估'], s5: ['竞赛马支持','国际赛事现场服务','性能优化方案','赛后恢复'], s6: ['定期健康检查','个性化预防计划','营养建议','钉蹄优化'], feat1t: '精准诊断', feat1s: '新一代影像技术', feat2t: '再生医学', feat2s: '创新生物治疗', procTitle: '我们的诊疗流程', procSub: '结构化流程获得更佳结果', p1t: '初诊咨询', p1d: '全面检查与需求沟通', p2t: '诊断检查', p2d: '先进设备确保精准诊断', p3t: '治疗方案', p3d: '为马匹制定个性化方案', p4t: '随访', p4d: '全程支持恢复与康复', cta: '预约就诊' },
+  ja: { intro: '当院は最新設備を備え、最高水準のケアを提供します。', s1: ['低侵襲関節鏡手術','腱・靭帯手術','骨折の骨接合術','背部・脊椎手術'], s2: ['高解像度デジタルX線','運動器超音波','馬MRI','骨シンチグラフィ'], s3: ['幹細胞療法','PRP注射','IRAP療法','体外衝撃波'], s4: ['包括的バイオメカニクス解析','屈曲試験','診断ブロック','トレッドミル評価'], s5: ['競技馬のサポート','国際大会での帯同','パフォーマンス最適化','試合後リカバリー'], s6: ['定期ヘルスチェック','個別予防プログラム','栄養アドバイス','装蹄の最適化'], feat1t: '精密診断', feat1s: '最新世代の画像技術', feat2t: '再生医療', feat2s: '革新的な生物学的治療', procTitle: '治療の流れ', procSub: '最適な結果のための体系的な流れ', p1t: '初回相談', p1d: '詳細な検査とヒアリング', p2t: '診断', p2d: '先進機器による正確な診断', p3t: '治療計画', p3d: '馬に合わせた個別プロトコル', p4t: 'フォロー', p4d: '回復・リハビリまで継続支援', cta: '予約する' },
+  ar: { intro: 'عيادتنا مجهزة بأحدث التقنيات لتقديم رعاية بأعلى جودة.', s1: ['تنظير مفصل قليل التوغل','جراحة الأوتار والأربطة','تثبيت الكسور','جراحة الظهر والعمود الفقري'], s2: ['أشعة رقمية عالية الدقة','موجات فوق صوتية للجهاز العضلي الهيكلي','تصوير MRI للخيول','مسح العظام'], s3: ['علاج بالخلايا الجذعية','حقن PRP','علاج IRAP','موجات صادمة خارج الجسم'], s4: ['تحليل ميكانيكي حيوي','اختبارات الثني','تخدير تشخيصي','تقييم على جهاز المشي'], s5: ['متابعة خيول المنافسات','حضور في الفعاليات الدولية','برامج تحسين الأداء','بروتوكولات التعافي بعد المنافسة'], s6: ['فحوصات صحية دورية','برامج وقاية مخصصة','نصائح غذائية','تحسين الحوافر'], feat1t: 'تشخيص دقيق', feat1s: 'تقنيات تصوير من أحدث جيل', feat2t: 'طب تجديدي', feat2s: 'علاجات بيولوجية مبتكرة', procTitle: 'نهجنا العلاجي', procSub: 'خطوات منظمة لتحقيق أفضل النتائج', p1t: 'استشارة أولية', p1d: 'فحص سريري كامل ومناقشة', p2t: 'تشخيص', p2d: 'معدات متقدمة لتشخيص دقيق', p3t: 'خطة علاج', p3d: 'بروتوكول مخصص يناسب حصانك', p4t: 'متابعة', p4d: 'دعم خلال التعافي وإعادة التأهيل', cta: 'حجز موعد' },
+}
+
 export function Services() {
-  const { t } = useLanguage()
-
+  const { t, language } = useLanguage()
+  const c = pick(language, copy)
   const services = [
-    { 
-      icon: Stethoscope, 
-      title: t('service1Title'), 
-      desc: t('service1Desc'),
-      details: [
-        'Arthroscopie mini-invasive',
-        'Chirurgie des tendons et ligaments',
-        'Ostéosynthèse des fractures',
-        'Chirurgie du dos et de la colonne',
-      ]
-    },
-    { 
-      icon: Scan, 
-      title: t('service2Title'), 
-      desc: t('service2Desc'),
-      details: [
-        'Radiographie numérique haute résolution',
-        'Échographie musculo-squelettique',
-        'IRM équine',
-        'Scintigraphie osseuse',
-      ]
-    },
-    { 
-      icon: Heart, 
-      title: t('service3Title'), 
-      desc: t('service3Desc'),
-      details: [
-        'Thérapie par cellules souches',
-        'Injections de PRP',
-        'Thérapie IRAP',
-        'Ondes de choc extracorporelles',
-      ]
-    },
-    { 
-      icon: Activity, 
-      title: t('service4Title'), 
-      desc: t('service4Desc'),
-      details: [
-        'Analyse biomécanique complète',
-        'Tests de flexion',
-        'Anesthésies diagnostiques',
-        'Évaluation sur tapis roulant',
-      ]
-    },
-    { 
-      icon: Trophy, 
-      title: t('service5Title'), 
-      desc: t('service5Desc'),
-      details: [
-        'Suivi de chevaux de compétition',
-        'Présence sur les événements internationaux',
-        'Programmes de performance optimisée',
-        'Protocoles de récupération post-compétition',
-      ]
-    },
-    { 
-      icon: Shield, 
-      title: t('service6Title'), 
-      desc: t('service6Desc'),
-      details: [
-        'Bilans de santé réguliers',
-        'Programmes de prévention personnalisés',
-        'Conseils nutritionnels',
-        'Optimisation du ferrage',
-      ]
-    },
+    { icon: Stethoscope, title: t('service1Title'), desc: t('service1Desc'), details: c.s1 },
+    { icon: Scan, title: t('service2Title'), desc: t('service2Desc'), details: c.s2 },
+    { icon: Heart, title: t('service3Title'), desc: t('service3Desc'), details: c.s3 },
+    { icon: Activity, title: t('service4Title'), desc: t('service4Desc'), details: c.s4 },
+    { icon: Trophy, title: t('service5Title'), desc: t('service5Desc'), details: c.s5 },
+    { icon: Shield, title: t('service6Title'), desc: t('service6Desc'), details: c.s6 },
   ]
-
   const processSteps = [
-    { step: '01', title: 'Consultation Initiale', desc: 'Examen clinique complet et discussion de vos préoccupations' },
-    { step: '02', title: 'Diagnostic', desc: 'Utilisation d\'équipements de pointe pour un diagnostic précis' },
-    { step: '03', title: 'Plan de Traitement', desc: 'Élaboration d\'un protocole personnalisé adapté à votre cheval' },
-    { step: '04', title: 'Suivi', desc: 'Accompagnement tout au long de la récupération et rééducation' },
+    { step: '01', title: c.p1t, desc: c.p1d }, { step: '02', title: c.p2t, desc: c.p2d },
+    { step: '03', title: c.p3t, desc: c.p3d }, { step: '04', title: c.p4t, desc: c.p4d },
   ]
 
   return (
     <section id="services" className="relative py-24 bg-card">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Header */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }}
-          >
-            <div className="relative rounded-2xl overflow-hidden premium-shadow">
-              <img 
-                src={equineSurgery} 
-                alt="Modern equine surgery room"
-                className="w-full h-auto object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
-            </div>
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <div className="relative rounded-2xl overflow-hidden premium-shadow"><img src={equineSurgery} alt="Modern equine surgery room" className="w-full h-auto object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" /></div>
           </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }}
-          >
-            <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">
-              {t('servicesTag')}
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              {t('servicesTitle')}
-            </h1>
-            <p className="text-xl text-muted-foreground mb-6">
-              {t('servicesSubtitle')}
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Notre clinique est équipée des technologies les plus avancées pour offrir 
-              des soins de la plus haute qualité. Chaque traitement est personnalisé 
-              selon les besoins spécifiques de votre cheval.
-            </p>
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">{t('servicesTag')}</span>
+            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">{t('servicesTitle')}</h1>
+            <p className="text-xl text-muted-foreground mb-6">{t('servicesSubtitle')}</p>
+            <p className="text-lg text-muted-foreground leading-relaxed">{c.intro}</p>
           </motion.div>
         </div>
-
-        {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-          {services.map((service, index) => (
-            <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }} viewport={{ once: true }}
-              className="p-8 bg-background rounded-2xl border border-border hover:border-accent/50 transition-all premium-shadow group">
-              <div className="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
-                <service.icon className="w-7 h-7 text-accent" />
-              </div>
-              <h3 className="font-display text-xl font-bold text-foreground mb-3">{service.title}</h3>
-              <p className="text-muted-foreground mb-4">{service.desc}</p>
-              <ul className="space-y-2">
-                {service.details.map((detail, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
-                    {detail}
-                  </li>
-                ))}
-              </ul>
+          {services.map((svc, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} viewport={{ once: true }} className="p-8 bg-background rounded-2xl border border-border hover:border-accent/50 transition-all premium-shadow group">
+              <div className="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors"><svc.icon className="w-7 h-7 text-accent" /></div>
+              <h3 className="font-display text-xl font-bold text-foreground mb-3">{svc.title}</h3>
+              <p className="text-muted-foreground mb-4">{svc.desc}</p>
+              <ul className="space-y-2">{svc.details.map((d, j) => (<li key={j} className="flex items-center gap-2 text-sm text-muted-foreground"><CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />{d}</li>))}</ul>
             </motion.div>
           ))}
         </div>
-
-        {/* Featured Images */}
         <div className="grid md:grid-cols-2 gap-8 mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative rounded-2xl overflow-hidden aspect-video"
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative rounded-2xl overflow-hidden aspect-video">
             <img src={equineDiagnostics} alt="Equine diagnostics" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-              <div>
-                <h4 className="text-white font-display font-bold text-xl mb-2">Diagnostic de Précision</h4>
-                <p className="text-white/80">Technologies d'imagerie de dernière génération</p>
-              </div>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6"><div><h4 className="text-white font-display font-bold text-xl mb-2">{c.feat1t}</h4><p className="text-white/80">{c.feat1s}</p></div></div>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            viewport={{ once: true }}
-            className="relative rounded-2xl overflow-hidden aspect-video"
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} viewport={{ once: true }} className="relative rounded-2xl overflow-hidden aspect-video">
             <img src={regenerativeTreatment} alt="Regenerative treatment" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-              <div>
-                <h4 className="text-white font-display font-bold text-xl mb-2">Médecine Régénérative</h4>
-                <p className="text-white/80">Traitements biologiques innovants</p>
-              </div>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6"><div><h4 className="text-white font-display font-bold text-xl mb-2">{c.feat2t}</h4><p className="text-white/80">{c.feat2s}</p></div></div>
           </motion.div>
         </div>
-
-        {/* Process Steps */}
         <div className="mb-16">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Notre Processus de Soins
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Une approche structurée pour des résultats optimaux
-            </p>
-          </div>
-
+          <div className="text-center mb-12"><h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">{c.procTitle}</h2><p className="text-xl text-muted-foreground max-w-2xl mx-auto">{c.procSub}</p></div>
           <div className="grid md:grid-cols-4 gap-6">
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="relative"
-              >
-                <div className="text-6xl font-bold text-accent/20 mb-4">{step.step}</div>
-                <h4 className="font-display font-bold text-foreground mb-2">{step.title}</h4>
-                <p className="text-sm text-muted-foreground">{step.desc}</p>
-                {index < 3 && (
-                  <ArrowRight className="hidden md:block absolute top-8 -right-3 w-6 h-6 text-accent/40" />
-                )}
+            {processSteps.map((s, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} viewport={{ once: true }} className="relative">
+                <div className="text-6xl font-bold text-accent/20 mb-4">{s.step}</div>
+                <h4 className="font-display font-bold text-foreground mb-2">{s.title}</h4>
+                <p className="text-sm text-muted-foreground">{s.desc}</p>
+                {i < 3 && <ArrowRight className="hidden md:block absolute top-8 -right-3 w-6 h-6 text-accent/40" />}
               </motion.div>
             ))}
           </div>
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <Link 
-            to="/contact" 
-            className="inline-block gold-accent font-semibold px-8 py-4 rounded-lg text-lg hover:scale-105 transition-transform"
-          >
-            Prendre Rendez-vous
-          </Link>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
+          <Link to="/contact" className="inline-block gold-accent font-semibold px-8 py-4 rounded-lg text-lg hover:scale-105 transition-transform">{c.cta}</Link>
         </motion.div>
       </div>
     </section>
