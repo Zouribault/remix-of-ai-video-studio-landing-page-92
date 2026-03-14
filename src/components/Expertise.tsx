@@ -1,192 +1,100 @@
 import { motion } from 'framer-motion'
 import { Bone, Activity, Shield, Award, BookOpen, Users, Microscope, HeartPulse } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { pick } from '@/lib/i18n'
+import type { Language } from '@/lib/translations'
 import expertiseXray from '@/assets/expertise-xray.jpg'
 
+const copy: Record<Language, {
+  intro: string; d1: string; d2: string; d3: string; d4: string
+  resTitle: string; resSub: string; r1t: string; r1d: string; r2t: string; r2d: string; r3t: string; r3d: string; r4t: string; r4d: string
+  csTitle: string; csSub: string; lChallenge: string; lSolution: string; lResult: string
+  cs1t: string; cs1h: string; cs1c: string; cs1s: string; cs1r: string
+  cs2t: string; cs2h: string; cs2c: string; cs2s: string; cs2r: string
+}> = {
+  de: { intro: 'Drei Jahrzehnte Erfahrung haben eine einzigartige Expertise in der Behandlung komplexer orthopädischer Erkrankungen beim Pferd geformt.', d1: 'Über 2.000 Arthroskopien mit einer Erfolgsquote von 95 %. Spezialisierung auf komplexe Fälle im Hochleistungssport.', d2: 'Pionier in der Anwendung von Stammzellen und PRP zur Sehnenregeneration. Aktive Forschung in Kooperation mit Universitäten.', d3: 'Anerkannte Expertise in der Versorgung komplexer Frakturen. Moderne Osteosynthese-Techniken.', d4: 'Betreuung olympischer und weltmeisterlicher Champions mit tiefem Verständnis für den Spitzensport.', resTitle: 'Forschung & Lehre', resSub: 'Beitrag zur Weiterentwicklung der Pferdemedizin', r1t: 'Klinische Forschung', r1d: 'Aktive Teilnahme an Studien zu neuen Therapien', r2t: 'Publikationen', r2d: 'Über 50 Artikel in internationalen Fachzeitschriften', r3t: 'Lehre', r3d: 'Ausbildung der nächsten Generation spezialisierter Tierärzte', r4t: 'Innovation', r4d: 'Entwicklung neuer Behandlungsprotokolle', csTitle: 'Fallbeispiele', csSub: 'Konkrete Beispiele unserer Expertise', lChallenge: 'Herausforderung', lSolution: 'Lösung', lResult: 'Ergebnis', cs1t: 'Rehabilitation nach Sesambeinfraktur', cs1h: 'Springhengst, 10 Jahre', cs1c: 'Komplexe Fraktur des proximalen Sesambeins mit vorsichtiger Prognose', cs1s: 'Arthroskopische Operation + Stammzelltherapie', cs1r: 'Rückkehr in den internationalen Sport nach 8 Monaten', cs2t: 'Chronische Tendinitis erfolgreich behandelt', cs2h: 'Dressurstute, 8 Jahre', cs2c: 'Wiederkehrende Tendinitis trotz Vorbehandlungen', cs2s: 'PRP + Stoßwellen + individuelles Reha-Programm', cs2r: 'Vollständige Heilung und Qualifikation für nationale Meisterschaften' },
+  en: { intro: 'Three decades of experience have shaped a unique expertise in treating the most complex equine orthopedic conditions.', d1: 'Over 2,000 arthroscopies with a 95 % success rate, specializing in complex sport-horse cases.', d2: 'Pioneer in stem cells and PRP for tendon regeneration, with active university collaborations.', d3: 'Recognized expertise in complex fracture treatment using advanced osteosynthesis techniques.', d4: 'Care for Olympic and world champion horses with a deep understanding of elite discipline demands.', resTitle: 'Research & Teaching', resSub: 'Contributing to the advancement of equine veterinary medicine', r1t: 'Clinical research', r1d: 'Active participation in clinical studies on new equine therapies', r2t: 'Publications', r2d: 'Over 50 papers published in international journals', r3t: 'Teaching', r3d: 'Training the next generation of specialized veterinarians', r4t: 'Innovation', r4d: 'Developing new treatment protocols', csTitle: 'Case Studies', csSub: 'Real-world examples of our expertise in action', lChallenge: 'Challenge', lSolution: 'Solution', lResult: 'Result', cs1t: 'Recovery after sesamoid fracture', cs1h: 'Show jumping stallion, 10 years', cs1c: 'Complex proximal sesamoid fracture with guarded prognosis', cs1s: 'Arthroscopic surgery followed by stem cell therapy', cs1r: 'Returned to international competition after 8 months', cs2t: 'Chronic tendinitis resolved', cs2h: 'Dressage mare, 8 years', cs2c: 'Recurrent superficial digital flexor tendinitis', cs2s: 'Combined PRP + shockwave + personalized rehab', cs2r: 'Full recovery and qualification for national championships' },
+  fr: { intro: "Trois décennies d'expérience ont forgé une expertise unique dans le traitement des pathologies orthopédiques équines les plus complexes.", d1: 'Plus de 2000 arthroscopies avec un taux de succès de 95 %. Spécialisation dans les cas complexes de chevaux de sport.', d2: "Pionnier dans l'utilisation des cellules souches et du PRP pour la régénération des tendons.", d3: "Expertise reconnue dans le traitement des fractures complexes. Techniques d'ostéosynthèse de pointe.", d4: 'Suivi de champions olympiques et mondiaux. Compréhension approfondie des exigences du haut niveau.', resTitle: 'Recherche et Enseignement', resSub: "Contribuer à l'avancement de la médecine vétérinaire équine", r1t: 'Recherche Clinique', r1d: 'Participation active à des études sur les nouvelles thérapies', r2t: 'Publications', r2d: 'Plus de 50 articles dans des revues internationales', r3t: 'Enseignement', r3d: 'Formateur pour la prochaine génération de vétérinaires', r4t: 'Innovation', r4d: 'Développement de nouveaux protocoles de traitement', csTitle: 'Études de Cas', csSub: 'Des exemples concrets de notre expertise en action', lChallenge: 'Défi', lSolution: 'Solution', lResult: 'Résultat', cs1t: 'Récupération après fracture du sésamoïde', cs1h: "Stallion de saut d'obstacles, 10 ans", cs1c: 'Fracture complexe du sésamoïde proximal avec pronostic réservé', cs1s: 'Chirurgie arthroscopique + thérapie par cellules souches', cs1r: 'Retour à la compétition internationale après 8 mois', cs2t: 'Tendinite chronique résolue', cs2h: 'Jument de dressage, 8 ans', cs2c: 'Tendinite récurrente du fléchisseur superficiel', cs2s: 'PRP + ondes de choc + rééducation personnalisée', cs2r: 'Guérison complète, qualification aux championnats nationaux' },
+  es: { intro: 'Tres décadas de experiencia han forjado una pericia única en el tratamiento de las patologías ortopédicas equinas más complejas.', d1: 'Más de 2.000 artroscopias con 95 % de éxito.', d2: 'Pionero en células madre y PRP para la regeneración tendinosa.', d3: 'Experiencia reconocida en fracturas complejas.', d4: 'Seguimiento de campeones olímpicos y mundiales.', resTitle: 'Investigación y docencia', resSub: 'Contribuir al avance de la medicina veterinaria equina', r1t: 'Investigación clínica', r1d: 'Participación activa en estudios clínicos', r2t: 'Publicaciones', r2d: 'Más de 50 artículos en revistas internacionales', r3t: 'Docencia', r3d: 'Formación de veterinarios especializados', r4t: 'Innovación', r4d: 'Desarrollo de nuevos protocolos', csTitle: 'Casos clínicos', csSub: 'Ejemplos reales de nuestra experiencia', lChallenge: 'Desafío', lSolution: 'Solución', lResult: 'Resultado', cs1t: 'Recuperación tras fractura del sesamoideo', cs1h: 'Semental de salto, 10 años', cs1c: 'Fractura compleja del sesamoideo proximal', cs1s: 'Cirugía artroscópica + terapia con células madre', cs1r: 'Vuelta a la competición internacional tras 8 meses', cs2t: 'Tendinitis crónica resuelta', cs2h: 'Yegua de doma, 8 años', cs2c: 'Tendinitis recurrente del flexor digital superficial', cs2s: 'PRP + ondas de choque + rehabilitación personalizada', cs2r: 'Curación completa y clasificación para campeonatos nacionales' },
+  pt: { intro: 'Três décadas de experiência moldaram uma competência única no tratamento das patologias ortopédicas equinas mais complexas.', d1: 'Mais de 2.000 artroscopias com 95 % de sucesso.', d2: 'Pioneiro em células estaminais e PRP.', d3: 'Especialista em fraturas complexas.', d4: 'Acompanhamento de campeões olímpicos e mundiais.', resTitle: 'Investigação e ensino', resSub: 'Contribuir para o avanço da medicina veterinária equina', r1t: 'Investigação clínica', r1d: 'Participação ativa em estudos clínicos', r2t: 'Publicações', r2d: 'Mais de 50 artigos em revistas internacionais', r3t: 'Ensino', r3d: 'Formação de veterinários especializados', r4t: 'Inovação', r4d: 'Desenvolvimento de novos protocolos', csTitle: 'Casos clínicos', csSub: 'Exemplos reais da nossa experiência', lChallenge: 'Desafio', lSolution: 'Solução', lResult: 'Resultado', cs1t: 'Recuperação após fratura do sesamoide', cs1h: 'Garanhão de salto, 10 anos', cs1c: 'Fratura complexa do sesamoide proximal', cs1s: 'Cirurgia artroscópica + terapia com células estaminais', cs1r: 'Regresso à competição internacional após 8 meses', cs2t: 'Tendinite crónica resolvida', cs2h: 'Égua de dressage, 8 anos', cs2c: 'Tendinite recorrente do flexor digital superficial', cs2s: 'PRP + ondas de choque + reabilitação personalizada', cs2r: 'Recuperação completa e qualificação para campeonatos' },
+  it: { intro: "Tre decenni di esperienza hanno costruito una competenza unica nel trattamento delle patologie ortopediche equine più complesse.", d1: 'Oltre 2.000 artroscopie con il 95 % di successo.', d2: "Pioniere nell'uso di cellule staminali e PRP.", d3: 'Competenza riconosciuta nel trattamento di fratture complesse.', d4: 'Assistenza a campioni olimpici e mondiali.', resTitle: 'Ricerca e insegnamento', resSub: 'Contribuire al progresso della medicina veterinaria equina', r1t: 'Ricerca clinica', r1d: 'Partecipazione attiva a studi clinici', r2t: 'Pubblicazioni', r2d: 'Oltre 50 articoli in riviste internazionali', r3t: 'Insegnamento', r3d: 'Formazione di veterinari specializzati', r4t: 'Innovazione', r4d: 'Sviluppo di nuovi protocolli', csTitle: 'Casi clinici', csSub: 'Esempi concreti della nostra esperienza', lChallenge: 'Sfida', lSolution: 'Soluzione', lResult: 'Risultato', cs1t: 'Recupero dopo frattura del sesamoide', cs1h: 'Stallone da salto, 10 anni', cs1c: 'Frattura complessa del sesamoide prossimale', cs1s: 'Chirurgia artroscopica + cellule staminali', cs1r: 'Ritorno alle competizioni dopo 8 mesi', cs2t: 'Tendinite cronica risolta', cs2h: 'Giumenta da dressage, 8 anni', cs2c: 'Tendinite recidivante del flessore digitale superficiale', cs2s: "PRP + onde d'urto + riabilitazione personalizzata", cs2r: 'Guarigione completa e qualificazione ai campionati nazionali' },
+  no: { intro: 'Tre tiår med erfaring har gitt unik kompetanse i behandling av de mest komplekse ortopediske tilstandene hos hest.', d1: 'Over 2.000 artroskopier med 95 % suksessrate.', d2: 'Pioner innen stamceller og PRP for seneregenerasjon.', d3: 'Anerkjent ekspertise i komplekse brudd.', d4: 'Oppfølging av olympiske og verdensmestere.', resTitle: 'Forskning og undervisning', resSub: 'Bidra til utviklingen av veterinærmedisin for hest', r1t: 'Klinisk forskning', r1d: 'Aktiv deltakelse i kliniske studier', r2t: 'Publikasjoner', r2d: 'Over 50 artikler i internasjonale tidsskrifter', r3t: 'Undervisning', r3d: 'Opplæring av neste generasjon veterinærer', r4t: 'Innovasjon', r4d: 'Utvikling av nye behandlingsprotokoller', csTitle: 'Kasusstudier', csSub: 'Konkrete eksempler på vår kompetanse', lChallenge: 'Utfordring', lSolution: 'Løsning', lResult: 'Resultat', cs1t: 'Rehabilitering etter sesambeinsbrudd', cs1h: 'Spranghingst, 10 år', cs1c: 'Komplekst brudd i proximale sesambein', cs1s: 'Artroskopisk kirurgi + stamcellebehandling', cs1r: 'Tilbake i internasjonal sport etter 8 måneder', cs2t: 'Kronisk tendinitt løst', cs2h: 'Dressurhoppe, 8 år', cs2c: 'Tilbakevendende tendinitt', cs2s: 'PRP + sjokkbølge + tilpasset rehab', cs2r: 'Full tilheling og kvalifisering til nasjonale mesterskap' },
+  fi: { intro: 'Kolmen vuosikymmenen kokemus on luonut ainutlaatuisen osaamisen vaikeimpienkin ortopedisten sairauksien hoidossa.', d1: 'Yli 2 000 artroskopiaa ja 95 % onnistumisaste.', d2: 'Edelläkävijä kantasolujen ja PRP:n käytössä.', d3: 'Tunnustettu osaaminen murtumien hoidossa.', d4: 'Olympia- ja maailmanmestarihevosten hoito.', resTitle: 'Tutkimus ja opetus', resSub: 'Edistämme hevosten eläinlääketieteen kehitystä', r1t: 'Kliininen tutkimus', r1d: 'Aktiivinen osallistuminen tutkimuksiin', r2t: 'Julkaisut', r2d: 'Yli 50 artikkelia kansainvälisissä lehdissä', r3t: 'Opetus', r3d: 'Seuraavan sukupolven koulutus', r4t: 'Innovaatio', r4d: 'Uusien hoitoprotokollien kehittäminen', csTitle: 'Tapausesimerkit', csSub: 'Konkreettisia esimerkkejä osaamisestamme', lChallenge: 'Haaste', lSolution: 'Ratkaisu', lResult: 'Tulos', cs1t: 'Toipuminen sesamoidimurtumasta', cs1h: 'Esteratsastusori, 10 v', cs1c: 'Monimutkainen proksimaalinen sesamoidimurtuma', cs1s: 'Artroskooppinen leikkaus + kantasoluhoito', cs1r: 'Paluu kansainvälisiin kilpailuihin 8 kk jälkeen', cs2t: 'Krooninen tendiniitti ratkaistu', cs2h: 'Kouluratsastustamma, 8 v', cs2c: 'Toistuva pinnallisen koukistajan tendiniitti', cs2s: 'PRP + iskuaallot + yksilöllinen kuntoutus', cs2r: 'Täysi paraneminen ja karsinta mestaruuksiin' },
+  sv: { intro: 'Tre decennier av erfarenhet har skapat en unik kompetens i behandling av de mest komplexa ortopediska tillstånden hos häst.', d1: 'Över 2 000 artroskopier med 95 % lyckande.', d2: 'Pionjär inom stamceller och PRP.', d3: 'Erkänd expertis i komplexa frakturer.', d4: 'Vård av olympiska och världsmästare.', resTitle: 'Forskning och utbildning', resSub: 'Bidra till utvecklingen av veterinärmedicin för häst', r1t: 'Klinisk forskning', r1d: 'Aktivt deltagande i kliniska studier', r2t: 'Publikationer', r2d: 'Över 50 artiklar i internationella tidskrifter', r3t: 'Undervisning', r3d: 'Utbildar nästa generation', r4t: 'Innovation', r4d: 'Utveckling av nya protokoll', csTitle: 'Fallstudier', csSub: 'Konkreta exempel', lChallenge: 'Utmaning', lSolution: 'Lösning', lResult: 'Resultat', cs1t: 'Återhämtning efter sesamoidfraktur', cs1h: 'Hopphingst, 10 år', cs1c: 'Komplex proximal sesamoidfraktur', cs1s: 'Artroskopisk kirurgi + stamcellsterapi', cs1r: 'Tillbaka i tävling efter 8 månader', cs2t: 'Kronisk tendinit löst', cs2h: 'Dressyrsto, 8 år', cs2c: 'Återkommande tendinit i ytliga böjsenan', cs2s: 'PRP + stötvåg + personligt rehabprogram', cs2r: 'Full återhämtning och kvalificering' },
+  nl: { intro: 'Drie decennia ervaring hebben geleid tot unieke expertise in de behandeling van de meest complexe orthopedische aandoeningen bij paarden.', d1: 'Meer dan 2.000 arthroscopieën met 95 % slagen.', d2: 'Pionier in stamcellen en PRP.', d3: 'Erkende expertise in complexe fracturen.', d4: 'Begeleiding van olympische kampioenen.', resTitle: 'Onderzoek & onderwijs', resSub: 'Bijdragen aan de vooruitgang van de paardengeneeskunde', r1t: 'Klinisch onderzoek', r1d: 'Actieve deelname aan klinische studies', r2t: 'Publicaties', r2d: 'Meer dan 50 artikelen in internationale tijdschriften', r3t: 'Onderwijs', r3d: 'Opleiding van de volgende generatie', r4t: 'Innovatie', r4d: 'Ontwikkeling van nieuwe protocollen', csTitle: 'Casestudies', csSub: 'Concrete voorbeelden', lChallenge: 'Uitdaging', lSolution: 'Oplossing', lResult: 'Resultaat', cs1t: 'Herstel na sesamoidfractuur', cs1h: 'Springhengst, 10 jaar', cs1c: 'Complexe proximale sesamoidfractuur', cs1s: 'Artroscopie + stamceltherapie', cs1r: 'Terug in internationale competitie na 8 maanden', cs2t: 'Chronische tendinitis opgelost', cs2h: 'Dressuurmerrie, 8 jaar', cs2c: 'Terugkerende oppervlakkige buigpeestendinitis', cs2s: 'PRP + shockwave + personlijk revalidatieprogramma', cs2r: 'Volledig herstel en kwalificatie voor nationale kampioenschappen' },
+  ru: { intro: 'Три десятилетия опыта сформировали уникальную экспертизу в лечении самых сложных ортопедических заболеваний у лошадей.', d1: 'Более 2 000 артроскопий с успешностью 95 %.', d2: 'Пионер в применении стволовых клеток и PRP.', d3: 'Признанная экспертиза в лечении сложных переломов.', d4: 'Сопровождение олимпийских и мировых чемпионов.', resTitle: 'Исследования и обучение', resSub: 'Вклад в развитие ветеринарной медицины', r1t: 'Клинические исследования', r1d: 'Активное участие в исследованиях', r2t: 'Публикации', r2d: 'Более 50 статей в международных журналах', r3t: 'Обучение', r3d: 'Подготовка нового поколения ветеринаров', r4t: 'Инновации', r4d: 'Разработка новых протоколов лечения', csTitle: 'Клинические случаи', csSub: 'Реальные примеры нашей работы', lChallenge: 'Задача', lSolution: 'Решение', lResult: 'Результат', cs1t: 'Восстановление после перелома сесамовидной кости', cs1h: 'Жеребец по конкуру, 10 лет', cs1c: 'Сложный перелом проксимальной сесамовидной кости', cs1s: 'Артроскопия + терапия стволовыми клетками', cs1r: 'Возврат к стартам через 8 месяцев', cs2t: 'Хронический тендинит устранён', cs2h: 'Кобыла по выездке, 8 лет', cs2c: 'Рецидивирующий тендинит поверхностного сгибателя', cs2s: 'PRP + ударно-волновая + индивидуальная реабилитация', cs2r: 'Полное восстановление и квалификация на чемпионаты' },
+  zh: { intro: '三十年的临床经验让我们在处理最复杂的马科骨科问题方面形成了独到优势。', d1: '完成 2,000+ 例关节镜手术，成功率 95 %。', d2: '率先将干细胞与 PRP 用于肌腱再生。', d3: '在复杂骨折治疗方面经验丰富。', d4: '长期服务奥运及世界冠军马匹。', resTitle: '科研与教学', resSub: '推动马科兽医学的发展', r1t: '临床研究', r1d: '积极参与新型疗法的临床研究', r2t: '学术发表', r2d: '在国际期刊发表 50+ 篇论文', r3t: '教学培训', r3d: '培养下一代专业兽医', r4t: '创新', r4d: '研发新的治疗方案', csTitle: '案例研究', csSub: '真实案例展示专业能力', lChallenge: '挑战', lSolution: '方案', lResult: '结果', cs1t: '籽骨骨折后的康复', cs1h: '障碍赛公马，10 岁', cs1c: '近端籽骨复杂骨折', cs1s: '关节镜手术 + 干细胞治疗', cs1r: '8 个月后重返国际赛场', cs2t: '慢性肌腱炎成功解决', cs2h: '盛装舞步母马，8 岁', cs2c: '浅趾屈肌腱反复肌腱炎', cs2s: 'PRP + 冲击波 + 个性化康复', cs2r: '完全康复并获得全国锦标赛资格' },
+  ja: { intro: '30年にわたる経験により、最も複雑な馬の整形外科疾患に対応する独自の専門性を確立。', d1: '2,000件以上の関節鏡手術で成功率95 %。', d2: '腱再生に幹細胞とPRPを活用する先駆者。', d3: '複雑骨折の治療で高い評価。', d4: 'オリンピック／世界チャンピオンのサポート実績。', resTitle: '研究と教育', resSub: '馬の獣医学の発展に貢献', r1t: '臨床研究', r1d: '新治療に関する臨床研究へ参加', r2t: '論文', r2d: '国際学術誌に50本以上', r3t: '教育', r3d: '専門獣医師の次世代育成', r4t: 'イノベーション', r4d: '新しい治療プロトコルの開発', csTitle: '症例紹介', csSub: '専門性が発揮された具体例', lChallenge: '課題', lSolution: '治療', lResult: '結果', cs1t: '籽骨骨折からの復帰', cs1h: '障害馬の牡馬、10歳', cs1c: '近位籽骨の複雑骨折', cs1s: '関節鏡手術 + 幹細胞療法', cs1r: '8か月のリハビリ後に国際大会へ復帰', cs2t: '慢性腱炎の改善', cs2h: '馬場馬の牝馬、8歳', cs2c: '複数治療後も再発する浅趾屈筋腱炎', cs2s: 'PRP＋衝撃波＋個別リハビリ', cs2r: '完全回復し国内選手権へ出場資格' },
+  ar: { intro: 'ثلاثة عقود من الخبرة صاغت خبرة فريدة في علاج أكثر حالات جراحة العظام لدى الخيول تعقيداً.', d1: 'أكثر من 2000 تنظير مفصل بنسبة نجاح 95 %.', d2: 'رائد في الخلايا الجذعية وPRP لتجديد الأوتار.', d3: 'خبرة معترف بها في الكسور المعقدة.', d4: 'متابعة أبطال أولمبيين وعالميين.', resTitle: 'البحث والتعليم', resSub: 'المساهمة في تطوير طب الخيول', r1t: 'بحث سريري', r1d: 'مشاركة فعّالة في دراسات سريرية', r2t: 'منشورات', r2d: 'أكثر من 50 مقالة في مجلات دولية', r3t: 'التعليم', r3d: 'تدريب الجيل القادم من الأطباء البيطريين', r4t: 'ابتكار', r4d: 'تطوير بروتوكولات علاج جديدة', csTitle: 'دراسات حالة', csSub: 'أمثلة واقعية على خبرتنا', lChallenge: 'التحدي', lSolution: 'الحل', lResult: 'النتيجة', cs1t: 'التعافي بعد كسر العظم السمسماني', cs1h: 'فحل قفز حواجز، 10 سنوات', cs1c: 'كسر معقد في العظم السمسماني القريب', cs1s: 'تنظير مفصل + خلايا جذعية', cs1r: 'العودة للمنافسات الدولية بعد 8 أشهر', cs2t: 'حل التهاب أوتار مزمن', cs2h: 'فرس دريساج، 8 سنوات', cs2c: 'التهاب متكرر في الوتر المثني السطحي', cs2s: 'PRP + موجات صادمة + تأهيل مخصص', cs2r: 'شفاء تام والتأهل لبطولات وطنية' },
+}
+
 export function Expertise() {
-  const { t } = useLanguage()
-
+  const { t, language } = useLanguage()
+  const c = pick(language, copy)
   const expertises = [
-    { 
-      icon: Bone, 
-      title: t('expertise1Title'), 
-      desc: t('expertise1Desc'),
-      details: 'Plus de 2000 arthroscopies réalisées avec un taux de succès de 95%. Spécialisation dans les cas complexes de chevaux de sport de haut niveau.'
-    },
-    { 
-      icon: Activity, 
-      title: t('expertise2Title'), 
-      desc: t('expertise2Desc'),
-      details: 'Pionnier dans l\'utilisation des cellules souches et du PRP pour la régénération des tendons. Recherche active en collaboration avec des universités.'
-    },
-    { 
-      icon: Shield, 
-      title: t('expertise3Title'), 
-      desc: t('expertise3Desc'),
-      details: 'Expertise reconnue dans le traitement des fractures complexes. Techniques d\'ostéosynthèse de pointe permettant une récupération optimale.'
-    },
-    { 
-      icon: Award, 
-      title: t('expertise4Title'), 
-      desc: t('expertise4Desc'),
-      details: 'Suivi de champions olympiques et mondiaux. Compréhension approfondie des exigences spécifiques des disciplines équestres de haut niveau.'
-    },
+    { icon: Bone, title: t('expertise1Title'), desc: t('expertise1Desc'), details: c.d1 },
+    { icon: Activity, title: t('expertise2Title'), desc: t('expertise2Desc'), details: c.d2 },
+    { icon: Shield, title: t('expertise3Title'), desc: t('expertise3Desc'), details: c.d3 },
+    { icon: Award, title: t('expertise4Title'), desc: t('expertise4Desc'), details: c.d4 },
   ]
-
   const researchAreas = [
-    { icon: Microscope, title: 'Recherche Clinique', desc: 'Participation active à des études cliniques sur les nouvelles thérapies équines' },
-    { icon: BookOpen, title: 'Publications', desc: 'Plus de 50 articles publiés dans des revues scientifiques internationales' },
-    { icon: Users, title: 'Enseignement', desc: 'Formateur pour la prochaine génération de vétérinaires spécialisés' },
-    { icon: HeartPulse, title: 'Innovation', desc: 'Développement de nouveaux protocoles de traitement' },
+    { icon: Microscope, title: c.r1t, desc: c.r1d }, { icon: BookOpen, title: c.r2t, desc: c.r2d },
+    { icon: Users, title: c.r3t, desc: c.r3d }, { icon: HeartPulse, title: c.r4t, desc: c.r4d },
   ]
-
   const caseStudies = [
-    {
-      title: 'Récupération après fracture du sésamoïde',
-      horse: 'Stallion de saut d\'obstacles, 10 ans',
-      challenge: 'Fracture complexe du sésamoïde proximal avec pronostic initial réservé',
-      solution: 'Chirurgie arthroscopique suivie de thérapie par cellules souches',
-      result: 'Retour à la compétition internationale après 8 mois de rééducation',
-    },
-    {
-      title: 'Tendinite chronique résolue',
-      horse: 'Jument de dressage, 8 ans',
-      challenge: 'Tendinite récurrente du fléchisseur superficiel malgré plusieurs traitements',
-      solution: 'Protocole combiné PRP + ondes de choc + programme de rééducation personnalisé',
-      result: 'Guérison complète, qualification aux championnats nationaux',
-    },
+    { title: c.cs1t, horse: c.cs1h, challenge: c.cs1c, solution: c.cs1s, result: c.cs1r },
+    { title: c.cs2t, horse: c.cs2h, challenge: c.cs2c, solution: c.cs2s, result: c.cs2r },
   ]
 
   return (
     <section id="expertise" className="relative py-24 bg-background">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Header */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }}
-          >
-            <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">
-              {t('expertiseTag')}
-            </span>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              {t('expertiseTitle')}
-            </h1>
-            <p className="text-xl text-muted-foreground mb-6">
-              {t('expertiseSubtitle')}
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Trois décennies d'expérience ont forgé une expertise unique dans le traitement 
-              des pathologies orthopédiques équines les plus complexes. Notre approche combine 
-              savoir-faire traditionnel et innovations médicales de pointe.
-            </p>
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <span className="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6 border border-accent/20">{t('expertiseTag')}</span>
+            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">{t('expertiseTitle')}</h1>
+            <p className="text-xl text-muted-foreground mb-6">{t('expertiseSubtitle')}</p>
+            <p className="text-lg text-muted-foreground leading-relaxed">{c.intro}</p>
           </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }}
-          >
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <div className="relative rounded-2xl overflow-hidden premium-shadow">
-              <img 
-                src={expertiseXray} 
-                alt="Equine diagnostic expertise"
-                className="w-full h-auto object-cover"
-              />
+              <img src={expertiseXray} alt="Equine diagnostic expertise" className="w-full h-auto object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
             </div>
           </motion.div>
         </div>
-
-        {/* Expertise Grid */}
         <div className="grid md:grid-cols-2 gap-8 mb-24">
-          {expertises.map((expertise, index) => (
-            <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }} viewport={{ once: true }}
-              className="p-8 bg-card rounded-2xl border border-border hover:border-accent/50 transition-all premium-shadow group">
+          {expertises.map((e, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} viewport={{ once: true }} className="p-8 bg-card rounded-2xl border border-border hover:border-accent/50 transition-all premium-shadow group">
               <div className="flex items-start gap-6">
-                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-                  <expertise.icon className="w-8 h-8 text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-display text-xl font-bold text-foreground mb-3">{expertise.title}</h3>
-                  <p className="text-muted-foreground mb-3">{expertise.desc}</p>
-                  <p className="text-sm text-muted-foreground/80 italic">{expertise.details}</p>
-                </div>
+                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors"><e.icon className="w-8 h-8 text-accent" /></div>
+                <div><h3 className="font-display text-xl font-bold text-foreground mb-3">{e.title}</h3><p className="text-muted-foreground mb-3">{e.desc}</p><p className="text-sm text-muted-foreground/80 italic">{e.details}</p></div>
               </div>
             </motion.div>
           ))}
         </div>
-
-        {/* Research & Teaching */}
         <div className="mb-24">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Recherche et Enseignement
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Contribuer à l'avancement de la médecine vétérinaire équine
-            </p>
-          </div>
-
+          <div className="text-center mb-12"><h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">{c.resTitle}</h2><p className="text-xl text-muted-foreground max-w-2xl mx-auto">{c.resSub}</p></div>
           <div className="grid md:grid-cols-4 gap-6">
-            {researchAreas.map((area, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="p-6 bg-card rounded-2xl border border-border text-center"
-              >
-                <div className="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <area.icon className="w-7 h-7 text-accent" />
-                </div>
-                <h4 className="font-display font-bold text-foreground mb-2">{area.title}</h4>
-                <p className="text-sm text-muted-foreground">{area.desc}</p>
+            {researchAreas.map((a, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} viewport={{ once: true }} className="p-6 bg-card rounded-2xl border border-border text-center">
+                <div className="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4"><a.icon className="w-7 h-7 text-accent" /></div>
+                <h4 className="font-display font-bold text-foreground mb-2">{a.title}</h4><p className="text-sm text-muted-foreground">{a.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
-
-        {/* Case Studies */}
         <div>
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Études de Cas
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Des exemples concrets de notre expertise en action
-            </p>
-          </div>
-
+          <div className="text-center mb-12"><h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">{c.csTitle}</h2><p className="text-xl text-muted-foreground max-w-2xl mx-auto">{c.csSub}</p></div>
           <div className="grid md:grid-cols-2 gap-8">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="p-8 bg-card rounded-2xl border border-border premium-shadow"
-              >
-                <h3 className="font-display text-xl font-bold text-foreground mb-2">{study.title}</h3>
-                <p className="text-accent text-sm font-medium mb-4">{study.horse}</p>
-                
+            {caseStudies.map((s, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} viewport={{ once: true }} className="p-8 bg-card rounded-2xl border border-border premium-shadow">
+                <h3 className="font-display text-xl font-bold text-foreground mb-2">{s.title}</h3>
+                <p className="text-accent text-sm font-medium mb-4">{s.horse}</p>
                 <div className="space-y-4">
-                  <div>
-                    <span className="text-xs uppercase tracking-wider text-muted-foreground">Défi</span>
-                    <p className="text-muted-foreground">{study.challenge}</p>
-                  </div>
-                  <div>
-                    <span className="text-xs uppercase tracking-wider text-muted-foreground">Solution</span>
-                    <p className="text-muted-foreground">{study.solution}</p>
-                  </div>
-                  <div>
-                    <span className="text-xs uppercase tracking-wider text-accent">Résultat</span>
-                    <p className="text-foreground font-medium">{study.result}</p>
-                  </div>
+                  <div><span className="text-xs uppercase tracking-wider text-muted-foreground">{c.lChallenge}</span><p className="text-muted-foreground">{s.challenge}</p></div>
+                  <div><span className="text-xs uppercase tracking-wider text-muted-foreground">{c.lSolution}</span><p className="text-muted-foreground">{s.solution}</p></div>
+                  <div><span className="text-xs uppercase tracking-wider text-accent">{c.lResult}</span><p className="text-foreground font-medium">{s.result}</p></div>
                 </div>
               </motion.div>
             ))}
